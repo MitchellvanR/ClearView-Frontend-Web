@@ -1,6 +1,6 @@
 <template>
     <div class="user-profile">
-        <h2>User Profile</h2>
+        <img class="logo" src="@/assets/logo.png" alt="ClearView logo">
         <p>Coming soon...</p>
     </div>
 </template>
@@ -12,10 +12,13 @@ export default {
 <style scoped>
     .user-profile {
         display: flex;
-        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
     }
 
-    .user-profile > * {
-        width: 100%;
+    .logo {
+        max-width: 50%;
+        max-height: 50%;
+        margin-right: 5%;
     }
 </style>
