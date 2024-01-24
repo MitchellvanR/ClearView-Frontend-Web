@@ -20,38 +20,14 @@ export default {
     components: {
         TodoListsListItem
     },
-    data() {
-        return {
-            todoLists: []
-        }
-    },
-    mounted() {
-        this.fetchTodoLists()
+    props: {
+        todoLists: Array
     },
     methods: {
-        fetchTodoLists() {
-            fetch('http://localhost:8080/clearview-api/todoLists')
-                .then(response => response.json())
-                .then(data => {
-                    this.todoLists = data
-                    this.sortTodoListsByDate(this.todoLists);
-                    if (this.todoLists.length > 0) {
-                    this.todoLists[0].isActive = true
-                }
-                })
-                .catch(err => console.log(err.message))
-        },
         handleItemClick(clickedItem) {
             this.todoLists.forEach(todoList => {
                 console.log(clickedItem)
                 todoList.isActive = todoList.date === clickedItem
-            })
-        },
-        sortTodoListsByDate(todoLists) {
-            todoLists.sort((a, b) => {
-                const dateA = Date.parse(a.date);
-                const dateB = Date.parse(b.date);
-                return dateA - dateB;
             })
         }
     }

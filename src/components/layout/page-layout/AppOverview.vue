@@ -1,7 +1,7 @@
 <template>
     <div class="app-overview">
         <UserProfile class="user-profile" />
-        <TodoLists class="todo-lists" />
+        <TodoLists class="todo-lists" :todoLists="todoLists" />
     </div>
 </template>
 <script>
@@ -14,10 +14,8 @@ export default {
         UserProfile,
         TodoLists
     },
-    data() {
-        return {
-            todoLists: []
-        }
+    props: {
+        todoLists: Array
     }
 }
 </script>

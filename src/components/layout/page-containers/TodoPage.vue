@@ -1,6 +1,6 @@
 <template>
     <div class="todo-page">
-        <AppOverview class="AppOverview" />
+        <AppOverview class="AppOverview" :todoLists="todoLists" />
         <TodoList class="TodoList" />
         <TodoDetails class="TodoDetails" />
     </div>
@@ -16,6 +16,35 @@ export default {
         AppOverview,
         TodoList,
         TodoDetails
+    },
+    data() {
+        return {
+            todoLists: []
+        }
+    },
+    mounted() {
+        this.fetchTodoLists();
+    },
+    methods: {
+        fetchTodoLists() {
+            fetch('http://localhost:8080/clearview-api/todoLists')
+                .then(response => response.json())
+                .then(data => {
+                    this.todoLists = data
+                    this.sortTodoListsByDate(this.todoLists);
+                    if (this.todoLists.length > 0) {
+                        this.todoLists[0].isActive = true
+                    }
+                })
+                .catch(err => console.log(err.message))
+        },
+        sortTodoListsByDate(todoLists) {
+            todoLists.sort((a, b) => {
+                const dateA = Date.parse(a.date);
+                const dateB = Date.parse(b.date);
+                return dateA - dateB;
+            })
+        }
     }
 }
 </script>
