@@ -6,7 +6,7 @@
       @mouseout="handleMouseOut"
       @transitionend="handleTransitionEnd"
     >
-      <h3>{{ date }}</h3>
+      <h3>{{ formattedDate }}</h3>
     </div>
   </template>
   
@@ -22,10 +22,22 @@
     data() {
       return {
         isHovered: false,
-        isTransitioning: false
+        isTransitioning: false,
+        formattedDate: this.date
       };
     },
+    mounted() {
+      this.formatDate()
+    },
     methods: {
+      formatDate() {
+        const options = { weekday: 'long', month: 'long', day: 'numeric' }
+        const formattedDate = new Date(this.date).toLocaleDateString('en-US', options)
+
+        const capitalizedMonth = formattedDate.replace(/\b\w/g, (char) => char.toUpperCase())
+
+        this.formattedDate = capitalizedMonth
+      },
       handleMouseOver() {
         this.isHovered = true;
         this.isTransitioning = true;
