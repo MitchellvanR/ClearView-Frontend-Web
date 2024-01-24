@@ -1,7 +1,7 @@
 <template>
     <div class="todo-page">
         <AppOverview class="AppOverview" :todoLists="todoLists" />
-        <TodoList class="TodoList" />
+        <TodoList class="TodoList" :todoList="todoLists[0]"/>
         <TodoDetails class="TodoDetails" />
     </div>
 </template>
@@ -32,9 +32,8 @@ export default {
                 .then(data => {
                     this.todoLists = data
                     this.sortTodoListsByDate(this.todoLists);
-                    if (this.todoLists.length > 0) {
-                        this.todoLists[0].isActive = true
-                    }
+                    if (this.todoLists.length > 0) this.todoLists[0].isActive = true
+                    this.formatDateTitle();
                 })
                 .catch(err => console.log(err.message))
         },
@@ -44,6 +43,17 @@ export default {
                 const dateB = Date.parse(b.date);
                 return dateA - dateB;
             })
+        },
+        formatDateTitle() {
+            this.todoLists.forEach(todoList => {
+                const options = { weekday: 'long', month: 'long', day: 'numeric' }
+                const formattedDate = new Date(todoList.date).toLocaleDateString('en-US', options)
+
+                const capitalizedMonth = formattedDate.replace(/\b\w/g, (char) => char.toUpperCase())
+
+                todoList.title = capitalizedMonth
+            });
+            
         }
     }
 }

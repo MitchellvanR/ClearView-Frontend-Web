@@ -3,7 +3,10 @@
 </template>
 <script>
 export default {
-
+    name: 'TodoList',
+    props: {
+        todoList: Object
+    }
 }
 </script>
 <style>
