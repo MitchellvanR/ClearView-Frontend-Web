@@ -6,7 +6,7 @@
     </div>
 </template>
 <script>
-import AppOverview from '../page-layout/AppOverview.vue'
+import AppOverview from '@/components/layout/page-layout/AppOverview.vue'
 import TodoList from '../page-layout/TodoList.vue'
 import TodoDetails from '../page-layout/TodoDetails.vue'
 
