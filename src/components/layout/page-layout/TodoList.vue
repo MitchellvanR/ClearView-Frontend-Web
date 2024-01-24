@@ -1,14 +1,84 @@
 <template>
-    <h1>Todo List</h1>
+    <div class="todo-list">
+        <div class="buffer"></div>
+        <div class="todo-list-content-wrapper">
+            <h1 class="todo-list-title">{{ todoList.title }}</h1>
+            <ul class="todo-list-list-items">
+                <TodoListItem 
+                    class="todo-list-item"
+                    v-for="todo in todoList.todos" 
+                    :key="todo.date" 
+                    :todo="todo"
+                    :isActive="todo.isActive"
+                    @Click="handleListItemClick(todo.title)"
+                />
+            </ul>
+        </div>
+    </div>
 </template>
 <script>
+import TodoListItem from '../../sections/todo-list/TodoListItem.vue'
+
 export default {
     name: 'TodoList',
+    components: {
+        TodoListItem
+    },
     props: {
         todoList: Object
+    },
+    methods: {
+        handleListItemClick(title) {
+            this.todoList.todos.forEach(todo => {
+                todo.isActive = todo.title === title
+                this.$emit('todo-updated', todo);
+            })
+        }
     }
 }
 </script>
 <style>
+    .todo-list {
+        display: grid;
+        grid-template-columns: 1fr 2.5fr;
+        grid-template-rows: 1fr;
+    }
 
+    .todo-list-content-wrapper {
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        margin-top: 35%;
+    }
+
+    .todo-list-title {
+        margin-bottom: 3%;
+    }
+
+    /* Adjust the styles for mobile devices */
+    @media (max-width: 1200px) {
+        .todo-list {
+            grid-template-columns: .5fr 3fr;
+
+        }
+    }
+
+    @media (max-width: 768px) {
+        .buffer {
+            display: none;
+        }
+
+        .todo-list-content-wrapper {
+            width: 100%;
+        }
+
+        .todo-list-item {
+            border-radius: none;
+        }
+
+        .todo-list {
+            grid-template-columns: .5fr 3fr;
+
+        }
+    }
 </style>

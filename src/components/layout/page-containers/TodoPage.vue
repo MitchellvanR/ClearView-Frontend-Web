@@ -1,7 +1,7 @@
 <template>
     <div class="todo-page">
         <AppOverview class="AppOverview" :todoLists="todoLists" />
-        <TodoList class="TodoList" :todoList="todoLists[0]"/>
+        <TodoList class="TodoList" v-if="todoLists.length > 0" :todoList="findActiveTodo"/>
         <TodoDetails class="TodoDetails" />
     </div>
 </template>
@@ -20,6 +20,11 @@ export default {
     data() {
         return {
             todoLists: []
+        }
+    },
+    computed: {
+        findActiveTodo() {
+            return this.todoLists.find(todoList => todoList.isActive == true);
         }
     },
     mounted() {
