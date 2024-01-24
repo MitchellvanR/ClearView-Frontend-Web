@@ -22,6 +22,7 @@ export default {
   --save-button-color: #52AB9F;
   --delete-button-color: #C34F5D; 
   --checked-todo-color: #7BC9BF;
+  --checkbox-hover-color: #ECF6FF;
 }
 
 * {

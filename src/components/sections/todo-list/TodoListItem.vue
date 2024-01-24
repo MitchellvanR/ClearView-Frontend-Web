@@ -1,11 +1,11 @@
 <template>
     <div 
         class="todo-list-item"
-        :class="{ active: isActiveValue }"
+        :class="{ active: isActiveValue, completed: isChecked }"
         @mouseover="handleMouseOver"
         @mouseout="handleMouseOut"
     >
-        <TodoListItemCheckbox />
+        <TodoListItemCheckbox :todoList="todoList" :todo="todo" @checkbox-toggled="handleCheckboxToggle" />
         <li class="todo-list-item-element">{{ todo.title }}</li>
     </div>
 </template>
@@ -19,13 +19,15 @@ export default {
     },
     props: {
         todo: Object,
+        todoList: Object,
         isActive: Boolean
     },
     data() {
         return {
             isActiveValue: this.isActive,
             isHovered: false,
-            isTransitioning: false
+            isTransitioning: false,
+            isChecked: this.todo.completed
         }
     },
     watch: {
@@ -45,6 +47,9 @@ export default {
             if (!this.isTransitioning) {
             this.isHovered = false;
             }
+        },
+        handleCheckboxToggle(isChecked) {
+            this.isChecked = isChecked;
         }
     }
 }
@@ -56,7 +61,7 @@ export default {
         flex-direction: row;
         padding: 1rem 1rem 1rem 2rem;
         /* padding-left: 0; */
-        transition: background-color 0.2s ease;
+        transition: all 0.2s ease;
     }
 
     .todo-list-item:hover, .active {
@@ -64,8 +69,13 @@ export default {
         cursor: pointer;
     }
 
+    .completed {
+        color: var(--checked-todo-color);
+        text-decoration: line-through;
+    }
+
     .hover {
-        transition: background-color 0.2s ease;
+        transition: all 0.2s ease;
     }
 
     .todo-list-item-element {

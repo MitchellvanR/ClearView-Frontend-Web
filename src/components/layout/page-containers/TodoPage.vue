@@ -38,7 +38,6 @@ export default {
                     this.todoLists = data
                     this.sortTodoListsByDate(this.todoLists);
                     if (this.todoLists.length > 0) this.todoLists[0].isActive = true
-                    this.formatDateTitle();
                 })
                 .catch(err => console.log(err.message))
         },
@@ -48,17 +47,6 @@ export default {
                 const dateB = Date.parse(b.date);
                 return dateA - dateB;
             })
-        },
-        formatDateTitle() {
-            this.todoLists.forEach(todoList => {
-                const options = { weekday: 'long', month: 'long', day: 'numeric' }
-                const formattedDate = new Date(todoList.date).toLocaleDateString('en-US', options)
-
-                const capitalizedMonth = formattedDate.replace(/\b\w/g, (char) => char.toUpperCase())
-
-                todoList.title = capitalizedMonth
-            });
-            
         }
     }
 }

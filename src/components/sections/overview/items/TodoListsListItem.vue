@@ -6,7 +6,7 @@
       @mouseout="handleMouseOut"
       @transitionend="handleTransitionEnd"
     >
-      <h3>{{ title }}</h3>
+      <h3>{{ formatDateTitle(date) }}</h3>
     </div>
   </template>
   
@@ -38,6 +38,14 @@
         if (!this.isTransitioning) {
           this.isHovered = false;
         }
+      },
+      formatDateTitle(date) {
+          const options = { weekday: 'long', month: 'long', day: 'numeric' }
+          const formattedDate = new Date(date).toLocaleDateString('en-US', options)
+
+          const capitalizedMonth = formattedDate.replace(/\b\w/g, (char) => char.toUpperCase())
+
+          return capitalizedMonth
       }
     }
   };

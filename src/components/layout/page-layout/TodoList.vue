@@ -2,13 +2,14 @@
     <div class="todo-list">
         <div class="buffer"></div>
         <div class="todo-list-content-wrapper">
-            <h1 class="todo-list-title">{{ todoList.title }}</h1>
+            <h1 class="todo-list-title">{{ formatDateTitle(todoList) }}</h1>
             <ul class="todo-list-list-items">
                 <TodoListItem 
                     class="todo-list-item"
                     v-for="todo in todoList.todos" 
                     :key="todo.date" 
                     :todo="todo"
+                    :todoList="todoList"
                     :isActive="todo.isActive"
                     @Click="handleListItemClick(todo.title)"
                 />
@@ -33,6 +34,14 @@ export default {
                 todo.isActive = todo.title === title
                 this.$emit('todo-updated', todo);
             })
+        },
+        formatDateTitle(todoList) {
+            const options = { weekday: 'long', month: 'long', day: 'numeric' }
+            const formattedDate = new Date(todoList.date).toLocaleDateString('en-US', options)
+
+            const capitalizedMonth = formattedDate.replace(/\b\w/g, (char) => char.toUpperCase())
+
+            return capitalizedMonth
         }
     }
 }
