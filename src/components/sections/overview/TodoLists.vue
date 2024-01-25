@@ -26,7 +26,6 @@ export default {
     methods: {
         handleItemClick(clickedItem) {
             this.todoLists.forEach(todoList => {
-                console.log(clickedItem)
                 todoList.isActive = todoList.date === clickedItem
             })
         }

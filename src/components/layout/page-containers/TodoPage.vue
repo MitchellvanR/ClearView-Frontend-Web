@@ -1,7 +1,7 @@
 <template>
     <div class="todo-page">
         <AppOverview class="AppOverview" :todoLists="todoLists" />
-        <TodoList class="TodoList" v-if="todoLists.length > 0" :todoList="findActiveTodo"/>
+        <TodoList class="TodoList" v-if="todoLists.length > 0" :todoList="findActiveTodoList()"/>
         <TodoDetails class="TodoDetails" />
     </div>
 </template>
@@ -22,24 +22,20 @@ export default {
             todoLists: []
         }
     },
-    computed: {
-        findActiveTodo() {
-            return this.todoLists.find(todoList => todoList.isActive == true);
-        }
-    },
     mounted() {
         this.fetchTodoLists();
     },
     methods: {
-        fetchTodoLists() {
-            fetch('http://localhost:8080/clearview-api/todoLists')
-                .then(response => response.json())
-                .then(data => {
-                    this.todoLists = data
-                    this.sortTodoListsByDate(this.todoLists);
-                    if (this.todoLists.length > 0) this.todoLists[0].isActive = true
-                })
-                .catch(err => console.log(err.message))
+        async fetchTodoLists() {
+            try {
+                const response = await fetch('http://localhost:8080/clearview-api/todoLists');
+                const data = await response.json();
+                this.todoLists = data;
+                this.sortTodoListsByDate(this.todoLists);
+                if (this.todoLists.length > 0) this.todoLists[0].isActive = true;
+            } catch (error) {
+                console.log(error.message);
+            }
         },
         sortTodoListsByDate(todoLists) {
             todoLists.sort((a, b) => {
@@ -47,6 +43,9 @@ export default {
                 const dateB = Date.parse(b.date);
                 return dateA - dateB;
             })
+        },
+        findActiveTodoList() {
+            return this.todoLists.find(todoList => todoList.isActive == true);
         }
     }
 }
