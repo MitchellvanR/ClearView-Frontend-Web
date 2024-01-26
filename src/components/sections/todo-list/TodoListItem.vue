@@ -3,8 +3,8 @@
       @mouseover="handleMouseOver"
       @mouseout="handleMouseOut"
     >
-      <TodoListItemCheckbox :todo="todo" :todoList="todoList" />
-      <li class="todo-list-item-text">{{ todo.title }}</li>
+      <TodoListItemCheckbox :todo="todo" :todoList="todoList" @checkbox-toggled="updateTodoStyle" />
+      <li class="todo-list-item-text" :class="{ completed: completed }">{{ todo.title }}</li>
     </div>
   </template>
   
@@ -21,12 +21,20 @@
       todoList: Object,
       isActive: Boolean
     },
+    data() {
+      return {
+        completed: this.todo.completed
+      }
+    },
     methods: {
       handleMouseOver() {
-        this.$emit('mouseover');
+        this.$emit('mouseover')
       },
       handleMouseOut() {
-        this.$emit('mouseout');
+        this.$emit('mouseout')
+      },
+      updateTodoStyle(checked) {
+        this.completed = checked
       }
     },
   };

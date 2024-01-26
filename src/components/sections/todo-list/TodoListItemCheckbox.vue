@@ -2,7 +2,7 @@
   <label class="checkbox-container">
     <input type="checkbox" class="checkbox-input" @click="updateTodoCompletionStatus"/>
     <span class="checkbox-checkmark">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#7BC9BF">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#7BC9BF" v-if="checked">
         <path d="M0 0h24v24H0V0z" fill="none"/>
         <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
       </svg>
@@ -20,21 +20,27 @@ export default {
   data() {
     return {
       isTogglingCheckbox: false,
+      checked: this.todo.completed
     };
   },
   methods: {
     async updateTodoCompletionStatus() {
       try {
         await fetch(`http://localhost:8080/clearview-api/todoLists/${this.todoList.title}/todos/${this.todo.title}/`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ completed: true })
-      });
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ completed: !this.checked })
+        });
+        this.toggleCheckStatus();
       } catch (err) {
         console.error('API request failed:', err);
       }
+    },
+    toggleCheckStatus() {
+      this.checked = !this.checked
+      this.$emit('checkbox-toggled', this.checked)
     }
   }
 }
