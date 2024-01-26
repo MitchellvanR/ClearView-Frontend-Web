@@ -1,9 +1,19 @@
 <template>
-    <h1>Todo Details</h1>
+    <div class="todo-details">
+        <TodoTitleDetails />
+        <TodoDescriptionDetails />
+    </div>
 </template>
 <script>
-export default {
+import TodoTitleDetails from '@/components/sections/todo-details/TodoTitleDetails.vue';
+import TodoDescriptionDetails from '@/components/sections/todo-details/TodoDescriptionDetails.vue';
 
+export default {
+    name: 'TodoDetails',
+    components: {
+        TodoTitleDetails,
+        TodoDescriptionDetails
+    }
 }
 </script>
 <style>
