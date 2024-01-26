@@ -1,6 +1,6 @@
 <template>
   <label class="checkbox-container">
-    <input type="checkbox" class="checkbox-input" @click="updateTodoCompletionStatus()"/>
+    <input type="checkbox" class="checkbox-input" @click="updateTodoCompletionStatus"/>
     <span class="checkbox-checkmark">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#7BC9BF">
         <path d="M0 0h24v24H0V0z" fill="none"/>
@@ -23,15 +23,18 @@ export default {
     };
   },
   methods: {
-  updateTodoCompletionStatus() {
-      fetch(`http://localhost:8080/clearview-api/todoLists/${this.todoList.title}/todos/${this.todo.id}/`, {
+    async updateTodoCompletionStatus() {
+      try {
+        await fetch(`http://localhost:8080/clearview-api/todoLists/${this.todoList.title}/todos/${this.todo.title}/`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ completed: true })
-      })
-      .catch(err => console.log(err.message))
+      });
+      } catch (err) {
+        console.error('API request failed:', err);
+      }
     }
   }
 }
