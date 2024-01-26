@@ -17,5 +17,10 @@ export default {
 }
 </script>
 <style>
-
+    .todo-details {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 7.5vh;
+    }
 </style>

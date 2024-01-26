@@ -28,10 +28,10 @@ export default {
 * {
   margin: 0;
   padding: 0;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
 }
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
   font-size: 1.7vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
