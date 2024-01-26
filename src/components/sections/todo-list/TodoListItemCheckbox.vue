@@ -26,14 +26,14 @@ export default {
   methods: {
     async updateTodoCompletionStatus() {
       try {
+        this.toggleCheckStatus();
         await fetch(`http://localhost:8080/clearview-api/todoLists/${this.todoList.title}/todos/${this.todo.title}/`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ completed: !this.checked })
+          body: JSON.stringify({ completed: this.checked })
         });
-        this.toggleCheckStatus();
       } catch (err) {
         console.error('API request failed:', err);
       }
