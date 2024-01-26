@@ -12,6 +12,7 @@
                 :todoList="todoList"
                 :isActive="todo.isActive"
                 @checkbox-toggled="updateTodo"
+                @click="handleListItemClick(todo.title)"
             />
         </ul>
       </div>
@@ -33,7 +34,6 @@
         handleListItemClick(title) {
             this.todoList.todos.forEach(todo => {
                 todo.isActive = todo.title === title
-                this.$emit('todo-updated', todo);
             })
         },
         formatDateTitle(todoList) {
