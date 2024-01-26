@@ -1,12 +1,15 @@
 <template>
     <div class="todo-title-details">
         <h2><label for="title-box">Title: </label></h2>
-        <input id="title-box" name="title-box" type="text" value="">
+        <input id="title-box" name="title-box" type="text" :value="titleValue">
     </div>
 </template>
 <script>
 export default {
-
+    name: 'TodoTitleDetails',
+    props: {
+        titleValue: String
+    }
 }
 </script>
 <style>

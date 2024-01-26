@@ -2,7 +2,7 @@
     <div class="todo-page">
         <AppOverview class="AppOverview" :todoLists="todoLists" />
         <TodoList class="TodoList" v-if="todoLists.length > 0" :todoList="findActiveTodoList()"/>
-        <TodoDetails class="TodoDetails" />
+        <TodoDetails class="TodoDetails" :todoListsLoaded="todoListsLoaded" :todoList="findActiveTodoList()" />
     </div>
 </template>
 <script>
@@ -19,7 +19,8 @@ export default {
     },
     data() {
         return {
-            todoLists: []
+            todoLists: [],
+            todoListsLoaded: false
         }
     },
     mounted() {
@@ -33,6 +34,7 @@ export default {
                 this.todoLists = data;
                 this.sortTodoListsByDate(this.todoLists);
                 if (this.todoLists.length > 0) this.todoLists[0].isActive = true;
+                this.todoListsLoaded = true;
             } catch (error) {
                 console.log(error.message);
             }

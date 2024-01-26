@@ -1,7 +1,7 @@
 <template>
     <div class="todo-details">
-        <TodoTitleDetails />
-        <TodoDescriptionDetails />
+        <TodoTitleDetails v-if="todoListsLoaded" :titleValue="findActiveTodo().title" />
+        <TodoDescriptionDetails v-if="todoListsLoaded" :descriptionValue="findActiveTodo().description"/>
     </div>
 </template>
 <script>
@@ -13,6 +13,17 @@ export default {
     components: {
         TodoTitleDetails,
         TodoDescriptionDetails
+    },
+    props: {
+        todoListsLoaded: Boolean,
+        todoList: Object
+    },
+    methods: {
+        findActiveTodo() {
+            const activeTodo = this.todoList.todos.find(todo => todo.isActive == true);
+            if (activeTodo != null) return activeTodo
+            return {}
+        }
     }
 }
 </script>
