@@ -11,6 +11,7 @@
                 :todo="todo"
                 :todoList="todoList"
                 :isActive="todo.isActive"
+                @checkbox-toggled="updateTodo"
             />
         </ul>
       </div>
@@ -40,6 +41,10 @@
             const formattedDate = new Date(todoList.date).toLocaleDateString('en-US', options)
             const capitalizedMonth = formattedDate.replace(/\b\w/g, (char) => char.toUpperCase())
             return capitalizedMonth
+        },
+        updateTodo(checked, todo) {
+            const originalTodo = this.todoList.todos.find(element => element === todo)
+            originalTodo.completed = checked
         }
     }
 }

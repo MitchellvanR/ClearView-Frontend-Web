@@ -33,8 +33,9 @@
       handleMouseOut() {
         this.$emit('mouseout')
       },
-      updateTodoStyle(checked) {
+      updateTodoStyle(checked, todo) {
         this.completed = checked
+        this.$emit('checkbox-toggled', checked, todo)
       }
     },
   };

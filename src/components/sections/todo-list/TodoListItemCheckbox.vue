@@ -40,7 +40,7 @@ export default {
     },
     toggleCheckStatus() {
       this.checked = !this.checked
-      this.$emit('checkbox-toggled', this.checked)
+      this.$emit('checkbox-toggled', this.checked, this.todo)
     }
   }
 }
