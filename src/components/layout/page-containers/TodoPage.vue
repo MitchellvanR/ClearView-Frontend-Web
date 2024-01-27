@@ -36,7 +36,7 @@ export default {
                 if (this.todoLists.length > 0) {
                     this.todoLists[0].isActive = true
                     this.todoListsLoaded = true;
-                };
+                }
             } catch (error) {
                 console.log(error.message);
             }
