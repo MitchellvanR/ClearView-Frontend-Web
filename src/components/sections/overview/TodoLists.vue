@@ -25,10 +25,18 @@ export default {
     },
     methods: {
         handleItemClick(clickedItem) {
+            this.clearActiveTodos()
             this.todoLists.forEach(todoList => {
                 todoList.isActive = todoList.date === clickedItem
                 this.$emit('todo-list-selected')
             })
+        },
+        clearActiveTodos() {
+            let activeTodoList = this.findActiveTodoList()
+            activeTodoList.todos.forEach(todo => todo.isActive = false)
+        },
+        findActiveTodoList() {
+            return this.todoLists.find(todoList => todoList.isActive == true);
         }
     }
 }

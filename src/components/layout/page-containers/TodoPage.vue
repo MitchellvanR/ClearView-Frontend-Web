@@ -1,7 +1,7 @@
 <template>
     <div class="todo-page">
         <AppOverview class="AppOverview" :todoLists="todoLists" @todo-list-selected="this.todoActive = false" />
-        <TodoList class="TodoList" v-if="todoListsLoaded" :todoList="findActiveTodoList()" :todoActive="todoActive" @todo-activated="this.todoActive = true" />
+        <TodoList class="TodoList" v-if="todoListsLoaded" :todoList="findActiveTodoList()" @todo-activated="this.todoActive = true" />
         <TodoDetails class="TodoDetails" :todoList="findActiveTodoList()" :todoActive="todoActive" @todo-details-closed="this.todoActive = false" />
     </div>
 </template>
