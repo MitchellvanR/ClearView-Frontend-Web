@@ -23,6 +23,8 @@ export default {
   --delete-button-color: #C34F5D; 
   --checked-todo-color: #7BC9BF;
   --checkbox-hover-color: #ECF6FF;
+  --exit-button-background-color: #ECECEC;
+  --exit-button-text-color: #C1C1C1;
 }
 
 * {

@@ -18,7 +18,7 @@ export default {
         flex-direction: column;
         text-align: left;
         gap: 1rem;
-        margin-top: 20vh;
+        margin-top: 5vh;
         width: 75%;
     }
 

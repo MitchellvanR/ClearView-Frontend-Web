@@ -35,6 +35,7 @@
             this.todoList.todos.forEach(todo => {
                 todo.isActive = todo.title === title
             })
+            this.$emit('todo-activated')
         },
         formatDateTitle(todoList) {
             const options = { weekday: 'long', month: 'long', day: 'numeric' }

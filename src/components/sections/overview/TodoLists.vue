@@ -27,6 +27,7 @@ export default {
         handleItemClick(clickedItem) {
             this.todoLists.forEach(todoList => {
                 todoList.isActive = todoList.date === clickedItem
+                this.$emit('todo-list-selected')
             })
         }
     }

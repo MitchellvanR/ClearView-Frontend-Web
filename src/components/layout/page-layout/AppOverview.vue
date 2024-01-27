@@ -1,7 +1,7 @@
 <template>
     <div class="app-overview">
         <UserProfile class="user-profile" />
-        <TodoLists class="todo-lists" :todoLists="todoLists" />
+        <TodoLists class="todo-lists" :todoLists="todoLists" @todo-list-selected="this.$emit('todo-list-selected')"/>
     </div>
 </template>
 <script>
