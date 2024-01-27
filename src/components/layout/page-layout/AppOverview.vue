@@ -2,18 +2,21 @@
     <div class="app-overview">
         <UserProfile class="user-profile" />
         <TodoLists class="todo-lists" :todoLists="todoLists" @todo-list-selected="this.$emit('todo-list-selected')"/>
+        <AddToListButton class="add-to-list-button-wrapper" /> 
     </div>
 </template>
 <script>
 import UserProfile from '@/components/sections/overview/UserProfile.vue'
 import TodoLists from '@/components/sections/overview/TodoLists.vue';
+import AddToListButton from '@/components/base/buttons/AddToListButton.vue';
 
 export default {
     name: 'AppOverview',
     components: {
-        UserProfile,
-        TodoLists
-    },
+    UserProfile,
+    TodoLists,
+    AddToListButton
+},
     props: {
         todoLists: Array
     }
@@ -32,6 +35,11 @@ export default {
 
     .todo-lists {
         width: 100%;
-        height: 80%;
+        height: 60%;
+    }
+
+    .add-to-list-button-wrapper {
+        width: 100%;
+        height: 20%;
     }
 </style>

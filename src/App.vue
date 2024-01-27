@@ -19,12 +19,14 @@ export default {
   --secondary-color: #D5E3E1;
   --tertiary-color: #E7E4DF;
   --add-button-color: #3C7669;
+  --add-button-hover-color: #4b9282;
   --save-button-color: #52AB9F;
   --delete-button-color: #C34F5D; 
   --checked-todo-color: #7BC9BF;
   --checkbox-hover-color: #ECF6FF;
   --exit-button-background-color: #ECECEC;
   --exit-button-text-color: #C1C1C1;
+  --default-text-color: #ffffff;
 }
 
 * {
