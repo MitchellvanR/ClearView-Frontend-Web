@@ -65,9 +65,7 @@ export default {
             newTodoList.isActive = true
         },
         handleTodoListDeleted(activeTodoList) {
-            console.log('Removing todo list from overview')
             this.todoLists.splice(this.todoLists.indexOf(activeTodoList), 1)
-            console.log(this.todoLists)
             this.sortTodoListsByDate(this.todoLists)
             this.todoLists[0].isActive = true;
         },

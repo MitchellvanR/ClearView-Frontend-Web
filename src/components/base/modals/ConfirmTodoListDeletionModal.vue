@@ -26,7 +26,6 @@ export default {
         },
         async deleteTodoList() {
             try {
-                console.log(this.activeTodoList.title)
                 await fetch(`http://localhost:8080/clearview-api/todoLists/${this.activeTodoList.title}`, {
                     method: 'DELETE',
                     headers: {
