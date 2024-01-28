@@ -37,6 +37,25 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
 }
 
+*::-webkit-scrollbar {
+    background-color: #fff;
+    width: 16px;
+}
+
+*::-webkit-scrollbar-track {
+    background-color: #fff;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #babac0;
+    border-radius: 16px;
+    border: 4px solid #fff;
+}
+
+*::-webkit-scrollbar-button {
+    display:none;
+}
+
 #app {
   font-size: 1.7vh;
   -webkit-font-smoothing: antialiased;
