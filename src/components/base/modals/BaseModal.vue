@@ -49,7 +49,7 @@ export default {
     }
 
     .modal-close-button-wrapper {
-        height: 20%;
+        height: 10%;
         display: flex;
         align-items: flex-start;
         justify-content: flex-end;

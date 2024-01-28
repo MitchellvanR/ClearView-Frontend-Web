@@ -1,32 +1,39 @@
 <template>
-    <div class="todo-list">
-      <div class="buffer"></div>
-      <div class="todo-list-wrapper">
-        <h1 class="todo-list-title">{{ formatDateTitle(todoList) }}</h1>
-        <ul>
-            <TodoListItem 
-                class="todo-list-item"
-                v-for="todo in todoList.todos" 
-                :key="todo.title"
-                :todo="todo"
-                :todoList="todoList"
-                :isActive="todo.isActive"
-                @checkbox-toggled="updateTodo"
-                @click="handleListItemClick(todo.title)"
-            />
-        </ul>
-      </div>
+    <div class="todo-list-content-wrapper">
+        <div class="todo-list">
+            <div class="buffer"></div>
+            <div class="todo-list-wrapper">
+                <h1 class="todo-list-title">{{ formatDateTitle(todoList) }}</h1>
+                <ul>
+                    <TodoListItem 
+                        class="todo-list-item"
+                        v-for="todo in todoList.todos" 
+                        :key="todo.title"
+                        :todo="todo"
+                        :todoList="todoList"
+                        :isActive="todo.isActive"
+                        @checkbox-toggled="updateTodo"
+                        @click="handleListItemClick(todo.title)"
+                    />
+                </ul>
+            </div>
+        </div>
+        <div class="todo-list-buttons">
+            <AddTodoButton />
+        </div>
     </div>
   </template>
   
   <script>
-  import TodoListItem from '../../sections/todo-list/TodoListItem.vue';
+  import AddTodoButton from '@/components/base/buttons/AddTodoButton.vue';
+import TodoListItem from '../../sections/todo-list/TodoListItem.vue';
   
   export default {
     name: 'TodoList',
     components: {
-      TodoListItem
-    },
+    TodoListItem,
+    AddTodoButton
+},
     props: {
       todoList: Object
     },
@@ -51,10 +58,16 @@
 }
 </script>
 <style>
+    .todo-list-content-wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
     .todo-list {
         display: grid;
         grid-template-columns: 1fr 2.5fr;
         grid-template-rows: 1fr;
+        height: 80%;
     }
 
     .todo-list-wrapper {
@@ -66,6 +79,14 @@
 
     .todo-list-title {
         margin-bottom: 3%;
+    }
+
+    .todo-list-buttons {
+        height: 20%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: flex-start;
     }
 
     /* Adjust the styles for mobile devices */
