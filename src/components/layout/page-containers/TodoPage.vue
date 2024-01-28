@@ -12,7 +12,9 @@
             class="TodoList" 
             :todoList="findActiveTodoList()" 
             :todoListsLoaded="todoListsLoaded"
+            :todoActive="todoActive"
             @todo-activated="this.todoActive = true" 
+            @todo-deactivated="this.todoActive = false"
             @todo-created="handleTodoCreated"
             @todo-deleted="handleTodoDeleted"
         />

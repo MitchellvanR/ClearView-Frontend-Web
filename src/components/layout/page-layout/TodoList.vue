@@ -39,19 +39,14 @@
 },
     props: {
       todoList: Object,
-      todoListsLoaded: Boolean
-    },
-    data() {
-        return {
-            todoActive: false
-        }
+      todoListsLoaded: Boolean,
+      todoActive: Boolean
     },
     methods: {
         handleListItemClick(title) {
             this.todoList.todos.forEach(todo => {
                 todo.isActive = todo.title === title
             })
-            this.todoActive = true;
             this.$emit('todo-activated')
         },
         formatDateTitle(todoList) {
@@ -67,26 +62,15 @@
         },
         handleTodoCreated(newTodo) {
             newTodo.isActive = true;
-            this.todoActive = true
+            this.$emit('todo-activated')
             this.$emit('todo-created', newTodo)
         },
         handleTodoDeletion(activeTodo) {
-            this.todoActive = false;
+            this.$emit('todo-deactivated')
             this.$emit('todo-deleted', activeTodo)
         },
         findActiveTodo() {
             return this.todoList.todos.find(todo => todo.isActive == true)
-        },
-        checkActiveTodos() {
-            if (!this.todoListsLoaded) return
-            this.todoList.todos.forEach(todo => {
-                if (todo.isActive) {
-                    this.activeTodo = true
-                    return
-                } else {
-                    this.activeTodo = false
-                }
-            })
         }
     }
 }
