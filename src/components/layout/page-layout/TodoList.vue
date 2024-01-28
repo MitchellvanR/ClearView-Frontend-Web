@@ -4,7 +4,7 @@
             <div class="buffer"></div>
             <div class="todo-list-wrapper">
                 <h1 class="todo-list-title">{{ formatDateTitle(todoList) }}</h1>
-                <ul class="todo-list-unordered-list" v-if="todoListsLoaded">
+                <ul v-if="todoListsLoaded">
                     <TodoListItem 
                         class="todo-list-item"
                         v-for="todo in todoList.todos" 
@@ -109,12 +109,7 @@
         flex-direction: column;
         text-align: left;
         margin-top: 35%;
-        overflow: scroll;
         padding-bottom: 1rem;
-    }
-
-    .todo-list-unordered-list {
-        overflow: scroll;
     }
 
     .todo-list-title {
