@@ -27,7 +27,8 @@ export default {
   --checkbox-hover-color: #ECF6FF;
   --exit-button-background-color: #ECECEC;
   --exit-button-text-color: #C1C1C1;
-  --default-text-color: #ffffff;
+  --default-text-color: #FFFFFF;
+  --input-offwhite-color: #EEEEEE;
 }
 
 * {
