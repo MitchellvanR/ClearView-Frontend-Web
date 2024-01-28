@@ -2,7 +2,7 @@
     <div class="app-overview">
         <UserProfile class="user-profile" />
         <TodoLists class="todo-lists" :todoLists="todoLists" @todo-list-selected="this.$emit('todo-list-selected')"/>
-        <AddToListButton class="add-to-list-button-wrapper" /> 
+        <AddToListButton v-if="todoLists.length > 0" class="add-to-list-button-wrapper" /> 
     </div>
 </template>
 <script>
