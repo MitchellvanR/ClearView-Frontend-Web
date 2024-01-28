@@ -22,6 +22,7 @@ export default {
   --add-button-hover-color: #4b9282;
   --save-button-color: #52AB9F;
   --delete-button-color: #C34F5D; 
+  --delete-button-hover-color: #C66D77;
   --checked-todo-color: #7BC9BF;
   --checkbox-hover-color: #ECF6FF;
   --exit-button-background-color: #ECECEC;

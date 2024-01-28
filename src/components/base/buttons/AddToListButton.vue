@@ -2,13 +2,24 @@
     <div class="add-to-list-button-wrapper">
         <button class="add-to-list-button" @click="startModal">Add</button>
     </div>
+    <AddTodoListModal v-if="modalTrigger" @modal-close="modalTrigger = false"/>
 </template>
 <script>
+import AddTodoListModal from '../modals/AddTodoListModal.vue'
+
 export default {
     name: 'AddToListButton',
+    components: {
+        AddTodoListModal
+    },
+    data() {
+        return {
+            modalTrigger: false
+        }
+    },
     methods: {
         startModal() {
-            console.log('Starting modal...')
+            this.modalTrigger = true
         }
     }
 }
