@@ -91,7 +91,7 @@
     }
 }
 </script>
-<style>
+<style scoped>
     .todo-list-content-wrapper {
         display: flex;
         flex-direction: column;
@@ -123,10 +123,11 @@
 
     .todo-list-buttons {
         height: 20%;
+        width: 50%;
         display: flex;
+        align-self: center;
         flex-direction: row;
         justify-content: space-evenly;
-        align-items: flex-start;
     }
 
     /* Adjust the styles for mobile devices */
