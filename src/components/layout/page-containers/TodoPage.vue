@@ -122,6 +122,7 @@ export default {
 
 .TodoList {
     background-color: var(--primary-color);
+    box-shadow: 10px 0 20px rgba(0, 0, 0, 0.2);
     flex: 2;
     width: 50vw;
     height: 100vh;
@@ -129,6 +130,7 @@ export default {
 
 .TodoDetails {
     background-color: var(--tertiary-color);
+    box-shadow: 10px 0 20px rgba(0, 0, 0, 0.2);
     flex: 1;
     width: 25vw;
     height: 100vh;
