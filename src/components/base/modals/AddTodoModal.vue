@@ -23,6 +23,9 @@ export default {
         createTodo() {
             console.log('Creating todo...')
             this.$emit('modal-close')
+        },
+        handleModalClose() {
+            this.$emit('modal-close')
         }
     }
 }
