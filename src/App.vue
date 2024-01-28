@@ -15,9 +15,9 @@ export default {
 
 <style>
 :root {
-  --primary-color: #D7EEEC;
-  --secondary-color: #D5E3E1;
-  --tertiary-color: #E7E4DF;
+  --primary-color: #C4E9F2;
+  --secondary-color: #66A9AA;
+  --tertiary-color: #FDF1DA;
   --add-button-color: #3C7669;
   --add-button-hover-color: #4b9282;
   --save-button-color: #52AB9F;
