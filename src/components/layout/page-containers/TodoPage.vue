@@ -10,8 +10,8 @@
         />
         <TodoList 
             class="TodoList" 
-            v-if="todoListsLoaded" 
             :todoList="findActiveTodoList()" 
+            :todoListsLoaded="todoListsLoaded"
             @todo-activated="this.todoActive = true" 
             @todo-created="handleTodoCreated"
         />
@@ -69,11 +69,16 @@ export default {
             this.todoLists.push(newTodoList)
             this.clearActiveTodoLists()
             this.sortTodoListsByDate(this.todoLists)
+            this.todoListsLoaded = true
             newTodoList.isActive = true
         },
         handleTodoListDeleted(activeTodoList) {
             this.todoLists.splice(this.todoLists.indexOf(activeTodoList), 1)
             this.sortTodoListsByDate(this.todoLists)
+            if (this.todoLists.length <= 0) {
+                this.todoListsLoaded = false
+                return
+            }
             this.todoLists[0].isActive = true;
         },
         clearActiveTodoLists() {

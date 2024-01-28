@@ -4,7 +4,7 @@
             <div class="buffer"></div>
             <div class="todo-list-wrapper">
                 <h1 class="todo-list-title">{{ formatDateTitle(todoList) }}</h1>
-                <ul class="todo-list-unordered-list">
+                <ul class="todo-list-unordered-list" v-if="todoListsLoaded">
                     <TodoListItem 
                         class="todo-list-item"
                         v-for="todo in todoList.todos" 
@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="todo-list-buttons">
-            <AddTodoButton :todoList="todoList" @todo-created="handleTodoCreated" />
+            <AddTodoButton v-if="todoListsLoaded" :todoList="todoList" @todo-created="handleTodoCreated" />
         </div>
     </div>
   </template>
@@ -35,7 +35,8 @@ import TodoListItem from '../../sections/todo-list/TodoListItem.vue';
     AddTodoButton
 },
     props: {
-      todoList: Object
+      todoList: Object,
+      todoListsLoaded: Boolean
     },
     methods: {
         handleListItemClick(title) {
@@ -45,6 +46,7 @@ import TodoListItem from '../../sections/todo-list/TodoListItem.vue';
             this.$emit('todo-activated')
         },
         formatDateTitle(todoList) {
+            if (!this.todoListsLoaded) return
             const options = { weekday: 'long', month: 'long', day: 'numeric' }
             const formattedDate = new Date(todoList.date).toLocaleDateString('en-US', options)
             const capitalizedMonth = formattedDate.replace(/\b\w/g, (char) => char.toUpperCase())

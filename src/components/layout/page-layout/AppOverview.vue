@@ -3,7 +3,7 @@
         <UserProfile class="user-profile" />
         <TodoLists class="todo-lists" :todoLists="todoLists" @todo-list-selected="this.$emit('todo-list-selected')"/>
         <div class="todo-list-buttons">
-            <AddTodoListButton v-if="todoLists.length > 0" class="add-to-list-button-wrapper" @todo-list-created="handleTodoListCreated" /> 
+            <AddTodoListButton class="add-to-list-button-wrapper" @todo-list-created="handleTodoListCreated" /> 
             <DeleteTodoListButton v-if="todoLists.length > 0" :activeTodoList="activeTodoList" class="delete-todo-list-button-wrapper" @todo-list-deleted="handleTodoListDeleted" />
         </div>
     </div>
