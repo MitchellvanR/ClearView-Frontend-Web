@@ -1,6 +1,13 @@
 <template>
     <div class="todo-page">
-        <AppOverview class="AppOverview" :todoLists="todoLists" @todo-list-selected="this.todoActive = false" @todo-list-created="handleTodoListCreated" />
+        <AppOverview 
+            class="AppOverview" 
+            :todoLists="todoLists" 
+            :activeTodoList="findActiveTodoList()" 
+            @todo-list-selected="this.todoActive = false" 
+            @todo-list-created="handleTodoListCreated"
+            @todo-list-deleted="handleTodoListDeleted"
+        />
         <TodoList class="TodoList" v-if="todoListsLoaded" :todoList="findActiveTodoList()" @todo-activated="this.todoActive = true" />
         <TodoDetails class="TodoDetails" :todoList="findActiveTodoList()" :todoActive="todoActive" @todo-details-closed="this.todoActive = false" />
     </div>
@@ -56,6 +63,13 @@ export default {
             this.clearActiveTodoLists()
             this.sortTodoListsByDate(this.todoLists)
             newTodoList.isActive = true
+        },
+        handleTodoListDeleted(activeTodoList) {
+            console.log('Removing todo list from overview')
+            this.todoLists.splice(this.todoLists.indexOf(activeTodoList), 1)
+            console.log(this.todoLists)
+            this.sortTodoListsByDate(this.todoLists)
+            this.todoLists[0].isActive = true;
         },
         clearActiveTodoLists() {
             this.todoLists.forEach(todoList => todoList.isActive = false)
