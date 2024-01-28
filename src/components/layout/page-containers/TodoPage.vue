@@ -8,7 +8,13 @@
             @todo-list-created="handleTodoListCreated"
             @todo-list-deleted="handleTodoListDeleted"
         />
-        <TodoList class="TodoList" v-if="todoListsLoaded" :todoList="findActiveTodoList()" @todo-activated="this.todoActive = true" />
+        <TodoList 
+            class="TodoList" 
+            v-if="todoListsLoaded" 
+            :todoList="findActiveTodoList()" 
+            @todo-activated="this.todoActive = true" 
+            @todo-created="handleTodoCreated"
+        />
         <TodoDetails class="TodoDetails" :todoList="findActiveTodoList()" :todoActive="todoActive" @todo-details-closed="this.todoActive = false" />
     </div>
 </template>
@@ -72,6 +78,13 @@ export default {
         },
         clearActiveTodoLists() {
             this.todoLists.forEach(todoList => todoList.isActive = false)
+        },
+        handleTodoCreated(newTodo) {
+            this.findActiveTodoList().todos.push(newTodo)
+            this.findActiveTodoList().todos.forEach(todo => todo.isActive = false)
+            this.todoActive = true;
+            newTodo.isActive = true;
+
         }
     }
 }

@@ -4,7 +4,7 @@
             <div class="buffer"></div>
             <div class="todo-list-wrapper">
                 <h1 class="todo-list-title">{{ formatDateTitle(todoList) }}</h1>
-                <ul>
+                <ul class="todo-list-unordered-list">
                     <TodoListItem 
                         class="todo-list-item"
                         v-for="todo in todoList.todos" 
@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="todo-list-buttons">
-            <AddTodoButton />
+            <AddTodoButton :todoList="todoList" @todo-created="handleTodoCreated" />
         </div>
     </div>
   </template>
@@ -53,6 +53,9 @@ import TodoListItem from '../../sections/todo-list/TodoListItem.vue';
         updateTodo(checked, todo) {
             const originalTodo = this.todoList.todos.find(element => element === todo)
             originalTodo.completed = checked
+        },
+        handleTodoCreated(newTodo) {
+            this.$emit('todo-created', newTodo)
         }
     }
 }
@@ -75,6 +78,12 @@ import TodoListItem from '../../sections/todo-list/TodoListItem.vue';
         flex-direction: column;
         text-align: left;
         margin-top: 35%;
+        overflow: scroll;
+        padding-bottom: 1rem;
+    }
+
+    .todo-list-unordered-list {
+        overflow: scroll;
     }
 
     .todo-list-title {

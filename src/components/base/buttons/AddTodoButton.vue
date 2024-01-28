@@ -1,8 +1,8 @@
 <template>
     <div class="add-todo-button-wrapper">
         <button class="add-todo-button" @click="startModal">Add</button>
+        <AddTodoModal v-if="modalTrigger" :todoList="todoList" @modal-close="modalTrigger = false" @todo-created="handleTodoCreated"/>
     </div>
-    <AddTodoModal v-if="modalTrigger" @modal-close="modalTrigger = false" @todo-created="handleTodoCreated"/>
 </template>
 <script>
 import AddTodoModal from '../modals/AddTodoModal.vue'
@@ -11,6 +11,9 @@ export default {
     name: 'AddTodoListButton',
     components: {
         AddTodoModal
+    },
+    props: {
+        todoList: Object
     },
     data() {
         return {

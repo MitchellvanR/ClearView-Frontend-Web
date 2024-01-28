@@ -19,9 +19,24 @@ export default {
     components: {
         BaseModal
     },
+    props: {
+        todoList: Object
+    },
     methods: {
-        createTodo() {
-            console.log('Creating todo...')
+        async createTodo() {
+            const todoTitle = this.$el.querySelector('.add-todo-title-input').value;
+            const todoDescription = this.$el.querySelector('.add-todo-description-input').value != null ? this.$el.querySelector('.add-todo-description-input').value : "";
+            const newTodo = { title: todoTitle, description: todoDescription, completed: false }
+
+            await fetch(`http://localhost:8080/clearview-api/todoLists/${this.todoList.title}/todos/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newTodo)
+            })
+                
+            this.$emit('todo-created', newTodo)
             this.$emit('modal-close')
         },
         handleModalClose() {
