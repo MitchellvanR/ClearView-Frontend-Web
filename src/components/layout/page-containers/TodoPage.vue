@@ -54,6 +54,7 @@ export default {
         handleTodoListCreated(newTodoList) {
             this.todoLists.push(newTodoList)
             this.clearActiveTodoLists()
+            this.sortTodoListsByDate(this.todoLists)
             newTodoList.isActive = true
         },
         clearActiveTodoLists() {

@@ -8,7 +8,7 @@
 import AddTodoListModal from '../modals/AddTodoListModal.vue'
 
 export default {
-    name: 'AddToListButton',
+    name: 'AddTodoListButton',
     components: {
         AddTodoListModal
     },

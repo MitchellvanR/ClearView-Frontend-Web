@@ -2,20 +2,20 @@
     <div class="app-overview">
         <UserProfile class="user-profile" />
         <TodoLists class="todo-lists" :todoLists="todoLists" @todo-list-selected="this.$emit('todo-list-selected')"/>
-        <AddToListButton v-if="todoLists.length > 0" class="add-to-list-button-wrapper" @todo-list-created="handleTodoListCreated" /> 
+        <AddTodoListButton v-if="todoLists.length > 0" class="add-to-list-button-wrapper" @todo-list-created="handleTodoListCreated" /> 
     </div>
 </template>
 <script>
 import UserProfile from '@/components/sections/overview/UserProfile.vue'
 import TodoLists from '@/components/sections/overview/TodoLists.vue';
-import AddToListButton from '@/components/base/buttons/AddToListButton.vue';
+import AddTodoListButton from '@/components/base/buttons/AddTodoListButton.vue';
 
 export default {
     name: 'AppOverview',
     components: {
         UserProfile,
         TodoLists,
-        AddToListButton
+        AddTodoListButton
     },
     props: {
         todoLists: Array
