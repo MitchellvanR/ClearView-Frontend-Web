@@ -68,6 +68,7 @@ export default {
         },
         handleTodoListCreated(newTodoList) {
             this.todoLists.push(newTodoList)
+            this.clearActiveTodos()
             this.clearActiveTodoLists()
             this.sortTodoListsByDate(this.todoLists)
             this.todoListsLoaded = true
@@ -85,17 +86,20 @@ export default {
         clearActiveTodoLists() {
             this.todoLists.forEach(todoList => todoList.isActive = false)
         },
+        clearActiveTodos() {
+            this.findActiveTodoList().todos.forEach(todo => todo.isActive = false)
+            this.todoActive = false
+        },
         handleTodoCreated(newTodo) {
             this.findActiveTodoList().todos.push(newTodo)
-            this.findActiveTodoList().todos.forEach(todo => todo.isActive = false)
-            this.todoActive = true;
+            this.clearActiveTodos()
             newTodo.isActive = true;
+            this.todoActive = true;
 
         },
         handleTodoDeleted(activeTodo) {
             this.findActiveTodoList().todos.splice(this.findActiveTodoList().todos.indexOf(activeTodo), 1)
-            this.findActiveTodoList().todos.forEach(todo => todo.isActive = false)
-            this.todoActive = false
+            this.clearActiveTodos()
         }
     }
 }
