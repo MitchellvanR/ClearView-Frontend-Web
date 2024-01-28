@@ -14,6 +14,7 @@
             :todoListsLoaded="todoListsLoaded"
             @todo-activated="this.todoActive = true" 
             @todo-created="handleTodoCreated"
+            @todo-deleted="handleTodoDeleted"
         />
         <TodoDetails class="TodoDetails" :todoList="findActiveTodoList()" :todoActive="todoActive" @todo-details-closed="this.todoActive = false" />
     </div>
@@ -90,6 +91,11 @@ export default {
             this.todoActive = true;
             newTodo.isActive = true;
 
+        },
+        handleTodoDeleted(activeTodo) {
+            this.findActiveTodoList().todos.splice(this.findActiveTodoList().todos.indexOf(activeTodo), 1)
+            this.findActiveTodoList().todos.forEach(todo => todo.isActive = false)
+            this.todoActive = false
         }
     }
 }

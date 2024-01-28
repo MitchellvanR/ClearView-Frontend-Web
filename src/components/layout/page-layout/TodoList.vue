@@ -20,29 +20,38 @@
         </div>
         <div class="todo-list-buttons">
             <AddTodoButton v-if="todoListsLoaded" :todoList="todoList" @todo-created="handleTodoCreated" />
+            <DeleteTodoButton v-if="todoListsLoaded && todoActive" :activeTodo="findActiveTodo()" :todoList="todoList" @todo-deleted="handleTodoDeletion" />
         </div>
     </div>
   </template>
   
   <script>
   import AddTodoButton from '@/components/base/buttons/AddTodoButton.vue';
-import TodoListItem from '../../sections/todo-list/TodoListItem.vue';
+  import DeleteTodoButton from '@/components/base/buttons/DeleteTodoButton.vue';
+  import TodoListItem from '../../sections/todo-list/TodoListItem.vue';
   
   export default {
     name: 'TodoList',
     components: {
     TodoListItem,
-    AddTodoButton
+    AddTodoButton,
+    DeleteTodoButton
 },
     props: {
       todoList: Object,
       todoListsLoaded: Boolean
+    },
+    data() {
+        return {
+            todoActive: false
+        }
     },
     methods: {
         handleListItemClick(title) {
             this.todoList.todos.forEach(todo => {
                 todo.isActive = todo.title === title
             })
+            this.todoActive = true;
             this.$emit('todo-activated')
         },
         formatDateTitle(todoList) {
@@ -57,7 +66,27 @@ import TodoListItem from '../../sections/todo-list/TodoListItem.vue';
             originalTodo.completed = checked
         },
         handleTodoCreated(newTodo) {
+            newTodo.isActive = true;
+            this.todoActive = true
             this.$emit('todo-created', newTodo)
+        },
+        handleTodoDeletion(activeTodo) {
+            this.todoActive = false;
+            this.$emit('todo-deleted', activeTodo)
+        },
+        findActiveTodo() {
+            return this.todoList.todos.find(todo => todo.isActive == true)
+        },
+        checkActiveTodos() {
+            if (!this.todoListsLoaded) return
+            this.todoList.todos.forEach(todo => {
+                if (todo.isActive) {
+                    this.activeTodo = true
+                    return
+                } else {
+                    this.activeTodo = false
+                }
+            })
         }
     }
 }
