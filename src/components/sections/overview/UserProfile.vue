@@ -1,7 +1,7 @@
 <template>
     <div class="user-profile">
         <img class="logo" src="@/assets/logo.png" alt="ClearView logo">
-        <p>Coming soon...</p>
+        <h2>ClearView</h2>
     </div>
 </template>
 <script>
