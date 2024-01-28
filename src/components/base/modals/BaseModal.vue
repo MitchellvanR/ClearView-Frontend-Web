@@ -1,10 +1,10 @@
 <template>
     <div class="modal">
         <div class="modal-inner">
-            <slot class="modal-content"></slot>
             <div class="modal-close-button-wrapper">
-                <button class="modal-close" @click="handleModalClose">Close</button>
+                <button class="modal-close" @click="handleModalClose">X</button>
             </div>
+            <slot class="modal-content"></slot>
         </div>
     </div>
 </template>
@@ -37,7 +37,8 @@ export default {
         border-radius: .5rem;
         width: 80vw;
         height: 50vh;
-        padding: 4rem;
+        padding: 1rem;
+        padding-bottom: 4rem;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -50,24 +51,28 @@ export default {
     .modal-close-button-wrapper {
         height: 20%;
         display: flex;
-        align-items: flex-end;
+        align-items: flex-start;
+        justify-content: flex-end;
+        width: 100%;
     }
 
     .modal-close {
-        display: block;
-        font-size: 1.7vh;
+        background-color: var(--exit-button-background-color);
+        border-radius: 50%;
         border: none;
-        border-radius: .5rem;
-        background-color: var(--delete-button-color);
-        color: var(--default-text-color);
-        width: 5vw;
-        height: 4vh;
-        transition: all .2s ease;
+        font-size: 1.5vw;
+        margin-top: 1vh;
+        margin-right: 2vh;
+        color: var(--exit-button-text-color);
+        width: 2.5vw;
+        height: 2.5vw;
+        transition: all .3s ease;
     }
 
     .modal-close:hover {
         cursor: pointer;
-        background-color: var(--delete-button-hover-color);
-        transition: all .2s ease;
+        background-color: var(--exit-button-text-color);
+        color: var(--exit-button-background-color);
+        transition: all .3s ease;
     }
 </style>
