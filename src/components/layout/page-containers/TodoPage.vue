@@ -1,6 +1,6 @@
 <template>
     <div class="todo-page">
-        <AppOverview class="AppOverview" :todoLists="todoLists" @todo-list-selected="this.todoActive = false" />
+        <AppOverview class="AppOverview" :todoLists="todoLists" @todo-list-selected="this.todoActive = false" @todo-list-created="handleTodoListCreated" />
         <TodoList class="TodoList" v-if="todoListsLoaded" :todoList="findActiveTodoList()" @todo-activated="this.todoActive = true" />
         <TodoDetails class="TodoDetails" :todoList="findActiveTodoList()" :todoActive="todoActive" @todo-details-closed="this.todoActive = false" />
     </div>
@@ -50,6 +50,14 @@ export default {
         },
         findActiveTodoList() {
             return this.todoLists.find(todoList => todoList.isActive == true);
+        },
+        handleTodoListCreated(newTodoList) {
+            this.todoLists.push(newTodoList)
+            this.clearActiveTodoLists()
+            newTodoList.isActive = true
+        },
+        clearActiveTodoLists() {
+            this.todoLists.forEach(todoList => todoList.isActive = false)
         }
     }
 }

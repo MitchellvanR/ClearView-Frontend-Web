@@ -5,7 +5,7 @@
             <form class="add-todo-list-input" @submit.prevent="createTodoList">
                 <label for="date">For which date would you like to make a Todo List</label>
                 <input class="add-todo-list-date-input" name="date" type="date" required>
-                <button class="create-todo-list-button" type="submit">Create</button>
+                <input class="create-todo-list-button" type="submit" value="Create">
             </form>
         </div>
     </BaseModal>
@@ -22,11 +22,24 @@ export default {
         handleModalClose() {
             this.$emit('modal-close')
         },
-        createTodoList() {
-            console.log('Creating todo list...')
-            
-            this.$emit('modal-close')
+        async createTodoList() {
+            try {
+                const dateInput = this.$el.querySelector('.add-todo-list-date-input').value;
+                let newTodoList = { title: dateInput, date: dateInput, todos: [] }
+                await fetch(`http://localhost:8080/clearview-api/todoLists/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(newTodoList)
+                })
+                this.$emit('todo-list-created', newTodoList)
+                this.$emit('modal-close')
+            } catch (err) {
+                console.error('API request failed:', err);
+            }
         }
+
     }
 }
 </script>

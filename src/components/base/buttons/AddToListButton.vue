@@ -2,7 +2,7 @@
     <div class="add-to-list-button-wrapper">
         <button class="add-to-list-button" @click="startModal">Add</button>
     </div>
-    <AddTodoListModal v-if="modalTrigger" @modal-close="modalTrigger = false"/>
+    <AddTodoListModal v-if="modalTrigger" @modal-close="modalTrigger = false" @todo-list-created="handleTodoListCreated"/>
 </template>
 <script>
 import AddTodoListModal from '../modals/AddTodoListModal.vue'
@@ -20,6 +20,9 @@ export default {
     methods: {
         startModal() {
             this.modalTrigger = true
+        },
+        handleTodoListCreated(newTodoList) {
+            this.$emit('todo-list-created', newTodoList)
         }
     }
 }
