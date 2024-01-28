@@ -4,7 +4,7 @@
             <h1>Add Todo List </h1>
             <form class="add-todo-list-input" @submit.prevent="createTodoList">
                 <label for="date">For which date would you like to make a Todo List</label>
-                <input class="add-todo-list-date-input" name="date" type="date" required>
+                <input class="add-todo-list-date-input" id="date" name="date" type="date" required>
                 <input class="create-todo-list-button" type="submit" value="Create">
             </form>
         </div>

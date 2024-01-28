@@ -1,6 +1,6 @@
 <template>
   <label class="checkbox-container">
-    <input type="checkbox" class="checkbox-input" @click="updateTodoCompletionStatus"/>
+    <input type="checkbox" name="checkbox" class="checkbox-input" @click="updateTodoCompletionStatus"/>
     <span class="checkbox-checkmark">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#7BC9BF" v-if="checked">
         <path d="M0 0h24v24H0V0z" fill="none"/>

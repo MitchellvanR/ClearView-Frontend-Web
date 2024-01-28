@@ -1,8 +1,8 @@
 <template>
     <div class="add-to-list-button-wrapper">
         <button class="add-to-list-button" @click="startModal">Add</button>
+        <AddTodoListModal v-if="modalTrigger" @modal-close="modalTrigger = false" @todo-list-created="handleTodoListCreated"/>
     </div>
-    <AddTodoListModal v-if="modalTrigger" @modal-close="modalTrigger = false" @todo-list-created="handleTodoListCreated"/>
 </template>
 <script>
 import AddTodoListModal from '../modals/AddTodoListModal.vue'

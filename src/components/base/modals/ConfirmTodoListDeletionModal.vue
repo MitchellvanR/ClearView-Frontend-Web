@@ -4,7 +4,7 @@
             <h1>Delete Todo List </h1>
             <form class="confirmation-modal-input" @submit.prevent="deleteTodoList">
                 <label for="deleteTodoList">Are you sure you want to delete this Todo List?</label>
-                <input class="confirm-delete-todo-list-button" type="submit" name="deleteTodoList" value="Yes, delete Todo List">
+                <input class="confirm-delete-todo-list-button" id="deleteTodoList" type="submit" name="deleteTodoList" value="Yes, delete Todo List">
             </form>
         </div>
     </BaseModal>

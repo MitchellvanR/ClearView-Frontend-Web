@@ -4,9 +4,9 @@
             <h1>Add Todo</h1>
             <form class="add-todo-input" @submit.prevent="createTodo">
                 <label for="title">What would you like to do:</label>
-                <input class="add-todo-title-input" name="title" type="text" required>
+                <input class="add-todo-title-input" id="title" name="title" type="text" required>
                 <label for="description">Add a description:</label>
-                <textarea class="add-todo-description-input" name="description" type="text" rows="7"></textarea>
+                <textarea class="add-todo-description-input" id="description" name="description" type="text" rows="7"></textarea>
                 <input class="create-todo-button" type="submit" value="Create">
             </form>
         </div>

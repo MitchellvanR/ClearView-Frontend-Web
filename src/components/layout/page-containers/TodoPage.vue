@@ -27,7 +27,8 @@ export default {
     data() {
         return {
             todoLists: [],
-            todoActive: false
+            todoActive: false,
+            todoListsLoaded: false
         }
     },
     mounted() {
