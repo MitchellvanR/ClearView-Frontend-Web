@@ -9,7 +9,7 @@
     <li class="todo-list-item-text" :class="{ completed: completed }">{{ todo.title }}</li>
     <DeleteTodoButton 
       class="todo-list-item-delete-button" 
-      v-if="isActive || isHovered" 
+      v-if="isHovered" 
       :activeTodo="activeTodo" 
       :todoList="todoList" 
       @todo-deleted="handleTodoDeletion"

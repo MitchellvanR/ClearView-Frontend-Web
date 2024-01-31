@@ -7,7 +7,7 @@
     >
       <h3 class="todo-list-title">{{ formatDateTitle(todoList.date) }}</h3>
       <DeleteTodoListButton 
-        v-if="isActive || isHovered" 
+        v-if="isHovered" 
         :activeTodoList="todoList" 
         class="delete-todo-list-button" 
         @todo-list-deleted="handleTodoListDeleted"
