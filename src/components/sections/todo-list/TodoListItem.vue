@@ -6,7 +6,7 @@
       @mouseout="handleMouseOut"
       @transitionend="handleTransitionEnd"
     >
-      <TodoListItemCheckbox class="todo-list-item-checkbox" :todo="todo" :todoList="todoList" @checkbox-toggled="updateTodoStyle" />
+      <TodoListItemCheckbox :todo="todo" :todoList="todoList" @checkbox-toggled="updateTodoStyle" />
       <li class="todo-list-item-text" :class="{ completed: completed }">{{ todo.title }}</li>
       <DeleteTodoButton class="todo-list-item-delete-button" v-if="isActive || isHovered" :activeTodo="activeTodo" :todoList="todoList" @todo-deleted="handleTodoDeletion" />
     </div>
@@ -68,10 +68,6 @@
     align-items: center;
   }
 
-  .todo-list-item-checkbox {
-    width: 10%;
-  }
-
   .todo-list-item-text {
     list-style: none;
     margin-left: 5%;
@@ -79,7 +75,7 @@
   }
 
   .todo-list-item-delete-button {
-    width: 10%;
+    width: 20%;
     display: flex;
     justify-content: center;
   }
