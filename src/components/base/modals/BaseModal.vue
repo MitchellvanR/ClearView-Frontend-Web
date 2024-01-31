@@ -21,6 +21,7 @@ export default {
 <style scoped>
     .modal {
         position: fixed;
+        color: var(--default-text-color);
         top: 0;
         left: 0;
         right: 0;

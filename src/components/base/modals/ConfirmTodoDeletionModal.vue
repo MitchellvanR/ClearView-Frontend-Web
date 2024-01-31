@@ -46,6 +46,7 @@ export default {
 <style>
     .confirmation-modal-content {
         height: 80%;
+        color: var(--default-text-color);
         display: flex;
         flex-direction: column;
         gap: 5rem;
@@ -64,7 +65,7 @@ export default {
         border: none;
         border-radius: .5rem;
         background-color: var(--delete-button-color);
-        color: var(--default-text-color);
+        color: var(--dark-background-text-color);
         width: 10vw;
         height: 5vh;
         transition: all .2s ease;

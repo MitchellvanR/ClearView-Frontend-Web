@@ -30,7 +30,7 @@ export default {
         border-radius: 50%;
         border: none;
         font-size: 1.5vw;
-        color: var(--dark-background-text-color);
+        color: var(--exit-button-text-color);
         margin-top: 2vh;
         width: 2.5vw;
         height: 2.5vw;
