@@ -4,40 +4,56 @@
       :class="{ active: todo.isActive }"
       @mouseover="handleMouseOver"
       @mouseout="handleMouseOut"
+      @transitionend="handleTransitionEnd"
     >
-      <TodoListItemCheckbox :todo="todo" :todoList="todoList" @checkbox-toggled="updateTodoStyle" />
+      <TodoListItemCheckbox class="todo-list-item-checkbox" :todo="todo" :todoList="todoList" @checkbox-toggled="updateTodoStyle" />
       <li class="todo-list-item-text" :class="{ completed: completed }">{{ todo.title }}</li>
+      <DeleteTodoButton class="todo-list-item-delete-button" v-if="isHovered" :activeTodo="activeTodo" :todoList="todoList" @todo-deleted="handleTodoDeletion" />
     </div>
   </template>
   
   <script>
   import TodoListItemCheckbox from './TodoListItemCheckbox.vue';
+  import DeleteTodoButton from '@/components/base/buttons/DeleteTodoButton.vue';
   
   export default {
     name: 'TodoListItem',
     components: {
-      TodoListItemCheckbox
+      TodoListItemCheckbox,
+      DeleteTodoButton
     },
     props: {
       todo: Object,
       todoList: Object,
-      isActive: Boolean
+      isActive: Boolean,
+      todoListsLoaded: Boolean,
+      activeTodo: Object
     },
     data() {
       return {
-        completed: this.todo.completed
+        completed: this.todo.completed,
+        isHovered: false
       }
     },
     methods: {
       handleMouseOver() {
-        this.$emit('mouseover')
+          this.isHovered = true;
+          this.isTransitioning = true;
       },
       handleMouseOut() {
-        this.$emit('mouseout')
+          this.isTransitioning = false;
+      },
+      handleTransitionEnd() {
+          if (!this.isTransitioning) {
+              this.isHovered = false;
+          }
       },
       updateTodoStyle(checked, todo) {
         this.completed = checked
         this.$emit('checkbox-toggled', checked, todo)
+      },
+      handleTodoDeletion(activeTodo) {
+        this.$emit('todo-deleted', activeTodo)
       }
     },
   };
@@ -47,10 +63,25 @@
   .todo-list-item {
     border-radius: 2rem 0 0 2rem;
     display: flex;
-    flex-direction: row;
-    padding: 1rem;
-    padding-left: 2rem;
+    padding: 1.5%;
     transition: all 0.2s ease;
+    align-items: center;
+  }
+
+  .todo-list-item-checkbox {
+    width: 10%;
+  }
+
+  .todo-list-item-text {
+    list-style: none;
+    margin-left: 5%;
+    width: 70%;
+  }
+
+  .todo-list-item-delete-button {
+    width: 10%;
+    display: flex;
+    justify-content: center;
   }
   
   .todo-list-item:hover, .active {
@@ -65,11 +96,6 @@
   
   .hover {
     transition: all 0.2s ease;
-  }
-  
-  .todo-list-item-text {
-    list-style: none;
-    margin-left: 5%;
   }
   </style>
   

@@ -12,30 +12,30 @@
                         :todo="todo"
                         :todoList="todoList"
                         :isActive="todo.isActive"
+                        :todoListsLoaded="todoListsLoaded"
+                        :activeTodo="findActiveTodo()"
                         @checkbox-toggled="updateTodo"
                         @click="handleListItemClick(todo.title)"
+                        @todo-deleted="handleTodoDeletion"
                     />
                 </ul>
             </div>
         </div>
         <div class="todo-list-buttons">
             <AddTodoButton v-if="todoListsLoaded" :todoList="todoList" @todo-created="handleTodoCreated" />
-            <DeleteTodoButton v-if="todoListsLoaded && todoActive" :activeTodo="findActiveTodo()" :todoList="todoList" @todo-deleted="handleTodoDeletion" />
         </div>
     </div>
   </template>
   
   <script>
   import AddTodoButton from '@/components/base/buttons/AddTodoButton.vue';
-  import DeleteTodoButton from '@/components/base/buttons/DeleteTodoButton.vue';
   import TodoListItem from '../../sections/todo-list/TodoListItem.vue';
   
   export default {
     name: 'TodoList',
     components: {
     TodoListItem,
-    AddTodoButton,
-    DeleteTodoButton
+    AddTodoButton
 },
     props: {
       todoList: Object,

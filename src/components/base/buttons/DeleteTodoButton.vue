@@ -1,6 +1,8 @@
 <template>
     <div class="delete-todo-button-wrapper">
-        <button class="delete-todo-button" @click="startModal">Delete</button>
+        <div class="delete-todo-button" @click="startModal">
+            <i class="fas fa-times"></i>
+        </div>
         <ConfirmTodoDeletionModal v-if="modalTrigger" :todoList="todoList" :activeTodo="activeTodo" @modal-close="modalTrigger = false" @todo-deleted="handleTodoDeletion"/>
     </div>
 </template>
@@ -32,26 +34,28 @@ export default {
 }
 </script>
 <style>
-    .delete-todo-button-wrapper {
-        display: flex;
-        justify-content: center;
-    }
-
     .delete-todo-button {
-        display: block;
-        font-size: 1.7vh;
-        border: none;
-        border-radius: .5rem;
-        background-color: var(--delete-button-color);
-        color: var(--dark-background-text-color);
-        width: 10vw;
-        height: 5vh;
-        transition: all .2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.7rem;
+        height: 1.7rem;
+        background-color: var(--exit-button-background-color);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
     }
 
     .delete-todo-button:hover {
-        cursor: pointer;
-        background-color: var(--delete-button-hover-color);
-        transition: all .2s ease;
+        background-color: var(--delete-button-color);
+    }
+
+    .delete-todo-button:hover > .fa-times {
+        color: var(--dark-background-text-color);
+    }
+
+    .fa-times {
+        color: var(--exit-button-text-color); 
+        font-size: 1rem; 
     }
 </style>

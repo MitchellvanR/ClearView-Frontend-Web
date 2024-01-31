@@ -47,10 +47,9 @@ export default {
 </script>
 <style scoped>
 .checkbox-container {
-  display: inline-block;
   position: relative;
-  padding-left: 25px;
   cursor: pointer;
+  padding-left: 1%;
 }
 
 .checkbox-input {
@@ -60,11 +59,8 @@ export default {
 }
 
 .checkbox-checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 25px;
-  width: 25px;
+  height: 1.5rem;
+  width: 1.5rem;
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 50%;
