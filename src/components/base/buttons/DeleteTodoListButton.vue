@@ -1,8 +1,10 @@
 <template>
-    <div class="trashcan-button" @click="startModal">
-        <i class="fas fa-trash-alt"></i>
-    </div>
-    <ConfirmTodoListDeletionModal v-if="modalTrigger" :activeTodoList="activeTodoList" @modal-close="modalTrigger = false" @todo-list-deleted="handleTodoListDeletion"/>   
+    <div class="delete-todo-list-button-wrapper">
+        <div class="trashcan-button" @click="startModal">
+            <i class="fas fa-trash-alt"></i>
+        </div>
+        <ConfirmTodoListDeletionModal v-if="modalTrigger" :activeTodoList="activeTodoList" @modal-close="modalTrigger = false" @todo-list-deleted="handleTodoListDeletion"/> 
+    </div>  
 </template>
 <script>
 import ConfirmTodoListDeletionModal from '../modals/ConfirmTodoListDeletionModal.vue'
