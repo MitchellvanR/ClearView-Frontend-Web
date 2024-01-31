@@ -1,10 +1,10 @@
 <template>
     <div class="todo-details">
         <ExitButton class="exit-button-component" v-if="todoActive" :todos="todoList.todos" @todo-details-closed="this.$emit('todo-details-closed')" />
-        <TodoTitleDetails class="todo-title-details" v-if="todoActive" :titleValue="findActiveTodo().title" />
-        <TodoDescriptionDetails class="todo-description-details" v-if="todoActive" :descriptionValue="findActiveTodo().description"/>
+        <TodoTitleDetails class="todo-title-details" v-if="todoActive" :titleValue="findActiveTodo().title" @update-title="onUpdateTitle" />
+        <TodoDescriptionDetails class="todo-description-details" v-if="todoActive" :descriptionValue="findActiveTodo().description" @update-description="onUpdateDescription"/>
         <div v-if="todoActive" class="todo-details-button-wrapper">
-            <SaveTodoButton />
+            <SaveTodoButton :activeTodo="findActiveTodo()" />
             <DeleteTodoButtonBig :activeTodo="findActiveTodo()" :todoList="todoList" @todo-deleted="handleTodoDeleted" />
         </div>
     </div>
@@ -37,6 +37,12 @@ export default {
         },
         handleTodoDeleted(activeTodo) {
             this.$emit('todo-deleted', activeTodo)
+        },
+        onUpdateTitle(title) {
+            this.findActiveTodo().title = title
+        },
+        onUpdateDescription(description) {
+            this.findActiveTodo().description = description
         }
     }
 }

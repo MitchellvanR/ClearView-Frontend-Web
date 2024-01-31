@@ -1,7 +1,7 @@
 <template>
     <div class="todo-title-details">
         <h2><label for="title-box">Title: </label></h2>
-        <input id="title-box" name="title-box" type="text" :value="titleValue">
+        <input id="title-box" name="title-box" type="text" :value="titleValue" @input="updateTitle">
     </div>
 </template>
 <script>
@@ -9,6 +9,11 @@ export default {
     name: 'TodoTitleDetails',
     props: {
         titleValue: String
+    },
+    methods: {
+        updateTitle(event) {
+            this.$emit('update-title', event.target.value);
+        }
     }
 }
 </script>

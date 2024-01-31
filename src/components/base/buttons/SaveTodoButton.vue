@@ -8,9 +8,13 @@
 <script>
 export default {
     name: 'SaveTodoButton',
+    props: {
+        activeTodo: Object
+    },
     methods: {
         updateDetails() {
-            console.log('Updating details to the cloud')
+            console.log(this.activeTodo.title)
+            console.log(this.activeTodo.description)
         }
     }
 }

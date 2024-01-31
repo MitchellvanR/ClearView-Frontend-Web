@@ -1,7 +1,7 @@
 <template>
     <div class="todo-description-details">
         <h2><label for="description-box">Description: </label></h2>
-        <textarea id="description-box" name="description-box" rows="7" :value="descriptionValue"></textarea>
+        <textarea id="description-box" name="description-box" rows="7" :value="descriptionValue" @input="updateDescription"></textarea>
     </div>
 </template>
 <script>
@@ -9,6 +9,11 @@ export default {
     name: 'TodoDescriptionDetails',
     props: {
         descriptionValue: String
+    },
+    methods: {
+        updateDescription(event) {
+            this.$emit('update-description', event.target.value)
+        }
     }
 }
 </script>
