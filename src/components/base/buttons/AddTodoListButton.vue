@@ -1,6 +1,8 @@
 <template>
     <div class="add-to-list-button-wrapper">
-        <button class="add-to-list-button" @click="startModal">Add</button>
+        <div class="add-to-list-button" @click="startModal">
+            <i class="fas fa-plus"></i>
+        </div>
         <AddTodoListModal v-if="modalTrigger" @modal-close="modalTrigger = false" @todo-list-created="handleTodoListCreated"/>
     </div>
 </template>
@@ -28,26 +30,25 @@ export default {
 }
 </script>
 <style>
-    .add-to-list-button-wrapper {
-        display: flex;
-        justify-content: center;
-    }
-
     .add-to-list-button {
-        display: block;
-        font-size: 1.7vh;
-        border: none;
-        border-radius: .5rem;
-        background-color: var(--add-button-color);
-        color: var(--dark-background-text-color);
-        width: 10vw;
-        height: 5vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 5rem;
+        height: 5rem;
+        background-color: var(--add-button-color); 
+        border-radius: 50%;
+        cursor: pointer;
         transition: all .2s ease;
     }
 
     .add-to-list-button:hover {
-        cursor: pointer;
         background-color: var(--add-button-hover-color);
         transition: all .2s ease;
+    }
+
+    .fa-plus {
+        color: var(--dark-background-text-color); 
+        font-size: 1.5rem;
     }
 </style>
