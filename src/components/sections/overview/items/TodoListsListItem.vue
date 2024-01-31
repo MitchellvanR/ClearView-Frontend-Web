@@ -2,12 +2,16 @@
     <div
       class="todo-lists-list-item"
       :class="{ active: isActive, hover: isHovered }"
-      @mouseover="handleMouseOver"
-      @mouseout="handleMouseOut"
-      @transitionend="handleTransitionEnd"
+      @mouseenter="handleMouseEnter"
+      @mouseleave="handleMouseLeave"
     >
       <h3 class="todo-list-title">{{ formatDateTitle(todoList.date) }}</h3>
-      <DeleteTodoListButton v-if="isActive || isHovered" :activeTodoList="todoList" class="delete-todo-list-button" @todo-list-deleted="handleTodoListDeleted" />
+      <DeleteTodoListButton 
+        v-if="isActive || isHovered" 
+        :activeTodoList="todoList" 
+        class="delete-todo-list-button" 
+        @todo-list-deleted="handleTodoListDeleted"
+      />
     </div>
   </template>
   
@@ -23,22 +27,15 @@ import DeleteTodoListButton from '@/components/base/buttons/DeleteTodoListButton
     data() {
         return {
             isHovered: false,
-            isTransitioning: false,
             formattedDate: this.date
         };
     },
     methods: {
-        handleMouseOver() {
+        handleMouseEnter() {
             this.isHovered = true;
-            this.isTransitioning = true;
         },
-        handleMouseOut() {
-            this.isTransitioning = false;
-        },
-        handleTransitionEnd() {
-            if (!this.isTransitioning) {
-                this.isHovered = false;
-            }
+        handleMouseLeave() {
+            this.isHovered = false;
         },
         formatDateTitle(date) {
             const options = { weekday: 'long', month: 'long', day: 'numeric' };
