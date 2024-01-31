@@ -3,12 +3,11 @@
         <TodoListsListItem 
             class="todo-lists-list-item" 
             v-for="todoList in todoLists"
-            :key="todoList.date"
-            :title="todoList.title"
-            :date="todoList.date"
-            :todos="todoList.todos"
+            :todoList="todoList"
             :isActive="todoList.isActive"
+            :key="todoList.date"
             @Click="handleItemClick(todoList.date)"
+            @todo-list-deleted="handleTodoListDeleted"
         />
     </div>
 </template>
@@ -37,6 +36,9 @@ export default {
         },
         findActiveTodoList() {
             return this.todoLists.find(todoList => todoList.isActive == true);
+        },
+        handleTodoListDeleted(activeTodoList) {
+            this.$emit('todo-list-deleted', activeTodoList)
         }
     }
 }
@@ -50,7 +52,6 @@ export default {
         display: flex;
         width: 100%;
         height: 8vh;
-        justify-content: center;
         align-items: center;
     }
 </style>

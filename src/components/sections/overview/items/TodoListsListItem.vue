@@ -6,64 +6,82 @@
       @mouseout="handleMouseOut"
       @transitionend="handleTransitionEnd"
     >
-      <h3>{{ formatDateTitle(date) }}</h3>
+      <h3 class="todo-list-title">{{ formatDateTitle(todoList.date) }}</h3>
+      <DeleteTodoListButton v-if="isHovered" :activeTodoList="todoList" class="delete-todo-list-button" @todo-list-deleted="handleTodoListDeleted" />
     </div>
   </template>
   
   <script>
+import DeleteTodoListButton from '@/components/base/buttons/DeleteTodoListButton.vue';
+
   export default {
     name: 'TodoListsListItem',
     props: {
-      title: String,
-      date: String,
-      todos: Array,
+      todoList: Object,
       isActive: Boolean
     },
     data() {
-      return {
-        isHovered: false,
-        isTransitioning: false,
-        formattedDate: this.date
-      };
+        return {
+            isHovered: false,
+            isTransitioning: false,
+            formattedDate: this.date
+        };
     },
     methods: {
-      handleMouseOver() {
-        this.isHovered = true;
-        this.isTransitioning = true;
-      },
-      handleMouseOut() {
-        this.isTransitioning = false;
-      },
-      handleTransitionEnd() {
-        if (!this.isTransitioning) {
-          this.isHovered = false;
+        handleMouseOver() {
+            this.isHovered = true;
+            this.isTransitioning = true;
+        },
+        handleMouseOut() {
+            this.isTransitioning = false;
+        },
+        handleTransitionEnd() {
+            if (!this.isTransitioning) {
+                this.isHovered = false;
+            }
+        },
+        formatDateTitle(date) {
+            const options = { weekday: 'long', month: 'long', day: 'numeric' };
+            const formattedDate = new Date(date).toLocaleDateString('en-US', options);
+            const capitalizedMonth = formattedDate.replace(/\b\w/g, (char) => char.toUpperCase());
+            return capitalizedMonth;
+        },
+        handleTodoListDeleted(activeTodoList) {
+            this.$emit('todo-list-deleted', activeTodoList)
         }
-      },
-      formatDateTitle(date) {
-          const options = { weekday: 'long', month: 'long', day: 'numeric' }
-          const formattedDate = new Date(date).toLocaleDateString('en-US', options)
-
-          const capitalizedMonth = formattedDate.replace(/\b\w/g, (char) => char.toUpperCase())
-
-          return capitalizedMonth
-      }
-    }
-  };
+    },
+    components: { DeleteTodoListButton }
+};
   </script>
   
   <style scoped>
   .todo-lists-list-item {
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    transition: all 0.2s ease;
+    display: flex;
+    width: 100%;
+  }
+
+  .todo-list-title {
+    text-align: left;
+    padding-left: 10%;
+    width: 70%;
   }
   
   .todo-lists-list-item:hover,
   .active {
     background-color: var(--primary-color);
     color: var(--default-text-color);
+    transition: all 0.2s ease;
   }
   
   .hover {
-    transition: background-color 0.2s ease;
+    transition: all 0.2s ease;
+  }
+
+  .delete-todo-list-button {
+    width: 10%;
+    justify-self: flex-end;
+    padding-right: 10%;
   }
   </style>

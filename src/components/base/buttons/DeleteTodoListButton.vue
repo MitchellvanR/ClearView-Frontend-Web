@@ -1,8 +1,8 @@
 <template>
-    <div class="delete-todo-list-button-wrapper">
-        <button class="delete-todo-list-button" @click="startModal">Delete</button>
-        <ConfirmTodoListDeletionModal v-if="modalTrigger" :activeTodoList="activeTodoList" @modal-close="modalTrigger = false" @todo-list-deleted="handleTodoListDeletion"/>
+    <div class="trashcan-button" @click="startModal">
+        <i class="fas fa-trash-alt"></i>
     </div>
+    <ConfirmTodoListDeletionModal v-if="modalTrigger" :activeTodoList="activeTodoList" @modal-close="modalTrigger = false" @todo-list-deleted="handleTodoListDeletion"/>   
 </template>
 <script>
 import ConfirmTodoListDeletionModal from '../modals/ConfirmTodoListDeletionModal.vue'
@@ -31,26 +31,25 @@ export default {
 }
 </script>
 <style>
-    .delete-todo-list-button-wrapper {
-        display: flex;
-        justify-content: center;
+
+    .trashcan-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    background-color: var(--secondary-color);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
     }
 
-    .delete-todo-list-button {
-        display: block;
-        font-size: 1.7vh;
-        border: none;
-        border-radius: .5rem;
-        background-color: var(--delete-button-color);
-        color: var(--dark-background-text-color);
-        width: 10vw;
-        height: 5vh;
-        transition: all .2s ease;
+    .trashcan-button:hover {
+    background-color: var(--delete-button-color);
     }
 
-    .delete-todo-list-button:hover {
-        cursor: pointer;
-        background-color: var(--delete-button-hover-color);
-        transition: all .2s ease;
+    .fa-trash-alt {
+    color: var(--dark-background-text-color); 
+    font-size: 1rem; 
     }
 </style>

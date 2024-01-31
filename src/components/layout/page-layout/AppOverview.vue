@@ -1,10 +1,9 @@
 <template>
     <div class="app-overview">
         <UserProfile class="user-profile" />
-        <TodoLists class="todo-lists" :todoLists="todoLists" @todo-list-selected="this.$emit('todo-list-selected')"/>
+        <TodoLists class="todo-lists" :todoLists="todoLists" @todo-list-deleted="handleTodoListDeleted" @todo-list-selected="this.$emit('todo-list-selected')"/>
         <div class="todo-list-buttons">
             <AddTodoListButton class="add-to-list-button-wrapper" @todo-list-created="handleTodoListCreated" /> 
-            <DeleteTodoListButton v-if="todoLists.length > 0" :activeTodoList="activeTodoList" class="delete-todo-list-button-wrapper" @todo-list-deleted="handleTodoListDeleted" />
         </div>
     </div>
 </template>
@@ -12,15 +11,13 @@
 import UserProfile from '@/components/sections/overview/UserProfile.vue'
 import TodoLists from '@/components/sections/overview/TodoLists.vue';
 import AddTodoListButton from '@/components/base/buttons/AddTodoListButton.vue';
-import DeleteTodoListButton from '@/components/base/buttons/DeleteTodoListButton.vue';
 
 export default {
     name: 'AppOverview',
     components: {
     UserProfile,
     TodoLists,
-    AddTodoListButton,
-    DeleteTodoListButton
+    AddTodoListButton
 },
     props: {
         todoLists: Array,
