@@ -18,7 +18,13 @@
             @todo-created="handleTodoCreated"
             @todo-deleted="handleTodoDeleted"
         />
-        <TodoDetails class="TodoDetails" :todoList="findActiveTodoList()" :todoActive="todoActive" @todo-details-closed="this.todoActive = false" />
+        <TodoDetails 
+            class="TodoDetails" 
+            :todoList="findActiveTodoList()" 
+            :todoActive="todoActive" 
+            @todo-details-closed="this.todoActive = false" 
+            @todo-deleted="handleTodoDeleted"
+        />
     </div>
 </template>
 <script>
