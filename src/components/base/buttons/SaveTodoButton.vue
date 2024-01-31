@@ -1,6 +1,6 @@
 <template>
     <div class="add-todo-button-wrapper">
-        <div class="add-todo-button" @click="updateDetails">
+        <div class="add-todo-button" @click="updateTodoDetails">
             <i class="fas fa-upload"></i>
         </div>
     </div>
@@ -9,13 +9,24 @@
 export default {
     name: 'SaveTodoButton',
     props: {
-        activeTodo: Object
+        activeTodo: Object,
+        todoList: Object
     },
     methods: {
-        updateDetails() {
-            console.log(this.activeTodo.title)
-            console.log(this.activeTodo.description)
-        }
+        async updateTodoDetails() {
+            try {
+                await fetch(`http://localhost:8080/clearview-api/todoLists/${this.todoList.title}/todos/${this.activeTodo.title}/`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ title: this.activeTodo.title, description: this.activeTodo.description })
+                });
+                this.$emit('todo-updated')
+            } catch (err) {
+                console.error('API request failed:', err);
+            }
+        },
     }
 }
 </script>

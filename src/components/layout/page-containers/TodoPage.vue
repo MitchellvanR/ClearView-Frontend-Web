@@ -23,6 +23,7 @@
             :todoList="findActiveTodoList()" 
             :todoActive="todoActive" 
             @todo-details-closed="this.todoActive = false" 
+            @todo-updated="handleTodoUpdated"
             @todo-deleted="handleTodoDeleted"
         />
     </div>
@@ -107,6 +108,9 @@ export default {
         },
         handleTodoDeleted(activeTodo) {
             this.findActiveTodoList().todos.splice(this.findActiveTodoList().todos.indexOf(activeTodo), 1)
+            this.clearActiveTodos()
+        },
+        handleTodoUpdated() {
             this.clearActiveTodos()
         }
     }

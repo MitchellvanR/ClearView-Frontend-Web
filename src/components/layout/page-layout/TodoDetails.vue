@@ -4,7 +4,7 @@
         <TodoTitleDetails class="todo-title-details" v-if="todoActive" :titleValue="findActiveTodo().title" @update-title="onUpdateTitle" />
         <TodoDescriptionDetails class="todo-description-details" v-if="todoActive" :descriptionValue="findActiveTodo().description" @update-description="onUpdateDescription"/>
         <div v-if="todoActive" class="todo-details-button-wrapper">
-            <SaveTodoButton :activeTodo="findActiveTodo()" />
+            <SaveTodoButton :todoList="todoList" :activeTodo="findActiveTodo()" @todo-updated="notifyTodoUpdate" />
             <DeleteTodoButtonBig :activeTodo="findActiveTodo()" :todoList="todoList" @todo-deleted="handleTodoDeleted" />
         </div>
     </div>
@@ -15,6 +15,9 @@ import TodoTitleDetails from '@/components/sections/todo-details/TodoTitleDetail
 import TodoDescriptionDetails from '@/components/sections/todo-details/TodoDescriptionDetails.vue';
 import SaveTodoButton from '@/components/base/buttons/SaveTodoButton.vue';
 import DeleteTodoButtonBig from '@/components/base/buttons/DeleteTodoButtonBig.vue'
+
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 export default {
     name: 'TodoDetails',
@@ -43,6 +46,12 @@ export default {
         },
         onUpdateDescription(description) {
             this.findActiveTodo().description = description
+        },
+        notifyTodoUpdate() {
+            this.$emit('todo-updated')
+            toast.success('Todo successfully updated!', {
+                autoClose: 3000
+            })
         }
     }
 }
