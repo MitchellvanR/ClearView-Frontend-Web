@@ -3,7 +3,7 @@
         <div class="add-todo-modal-content">
             <h1>Add Todo</h1>
             <form class="add-todo-input" @submit.prevent="createTodo">
-                <label for="title">What would you like to do:</label>
+                <label ref="titleInput" for="title">What would you like to do:</label>
                 <input class="add-todo-title-input" id="title" name="title" type="text" required>
                 <label for="description">Add a description:</label>
                 <textarea class="add-todo-description-input" id="description" name="description" type="text" rows="7"></textarea>
@@ -22,6 +22,23 @@ export default {
     props: {
         todoList: Object
     },
+    data() {
+        return {
+            isModalOpen: false
+        }
+    },
+    watch: {
+        isModalOpen(newValue) {
+            if (newValue) {
+                this.$nextTick(() => {
+                    this.$refs.titleInput.focus()
+                })
+            }
+        }
+    },
+    mounted() {
+        this.isModalOpen = true;
+    },
     methods: {
         async createTodo() {
             const todoTitle = this.$el.querySelector('.add-todo-title-input').value;
@@ -38,9 +55,11 @@ export default {
                 
             this.$emit('todo-created', newTodo)
             this.$emit('modal-close')
+            this.isModalOpen = false;
         },
         handleModalClose() {
             this.$emit('modal-close')
+            this.isModalOpen = false;
         }
     }
 }
