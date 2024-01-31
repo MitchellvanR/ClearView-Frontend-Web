@@ -60,6 +60,7 @@
   .todo-lists-list-item:hover,
   .active {
     background-color: var(--primary-color);
+    color: var(--default-text-color);
   }
   
   .hover {

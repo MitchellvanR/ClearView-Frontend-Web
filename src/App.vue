@@ -26,8 +26,8 @@ export default {
   --checked-todo-color: #7BC9BF;
   --checkbox-hover-color: #ECF6FF;
   --exit-button-background-color: #ECECEC;
-  --exit-button-text-color: #C1C1C1;
-  --default-text-color: #FFFFFF;
+  --default-text-color: #2c3e50;
+  --dark-background-text-color: #F0F0F0;
   --input-offwhite-color: #EEEEEE;
 }
 
@@ -61,6 +61,6 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: var(--default-text-color);
 }
 </style>

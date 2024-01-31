@@ -37,6 +37,10 @@ export default {
 }
 </script>
 <style>
+    .app-overview > * {
+        color: var(--dark-background-text-color);
+    }
+
     .app-overview {
         display: flex;
         flex-wrap: wrap;
