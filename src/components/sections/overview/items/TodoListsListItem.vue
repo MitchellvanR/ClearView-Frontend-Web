@@ -7,7 +7,7 @@
       @transitionend="handleTransitionEnd"
     >
       <h3 class="todo-list-title">{{ formatDateTitle(todoList.date) }}</h3>
-      <DeleteTodoListButton v-if="isHovered" :activeTodoList="todoList" class="delete-todo-list-button" @todo-list-deleted="handleTodoListDeleted" />
+      <DeleteTodoListButton v-if="isActive || isHovered" :activeTodoList="todoList" class="delete-todo-list-button" @todo-list-deleted="handleTodoListDeleted" />
     </div>
   </template>
   

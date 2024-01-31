@@ -8,7 +8,7 @@
     >
       <TodoListItemCheckbox class="todo-list-item-checkbox" :todo="todo" :todoList="todoList" @checkbox-toggled="updateTodoStyle" />
       <li class="todo-list-item-text" :class="{ completed: completed }">{{ todo.title }}</li>
-      <DeleteTodoButton class="todo-list-item-delete-button" v-if="isHovered" :activeTodo="activeTodo" :todoList="todoList" @todo-deleted="handleTodoDeletion" />
+      <DeleteTodoButton class="todo-list-item-delete-button" v-if="isActive || isHovered" :activeTodo="activeTodo" :todoList="todoList" @todo-deleted="handleTodoDeletion" />
     </div>
   </template>
   
