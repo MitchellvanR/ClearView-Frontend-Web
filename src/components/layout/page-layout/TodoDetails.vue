@@ -1,11 +1,35 @@
 <template>
     <div class="todo-details">
-        <ExitButton class="exit-button-component" v-if="todoActive" :todos="todoList.todos" @todo-details-closed="this.$emit('todo-details-closed')" />
-        <TodoTitleDetails class="todo-title-details" v-if="todoActive" :titleValue="findActiveTodo().title" @update-title="onUpdateTitle" />
-        <TodoDescriptionDetails class="todo-description-details" v-if="todoActive" :descriptionValue="findActiveTodo().description" @update-description="onUpdateDescription"/>
+        <ExitButton 
+            class="exit-button-component" 
+            v-if="todoActive" 
+            :todos="todoList.todos" 
+            @todo-details-closed="this.$emit('todo-details-closed')" 
+        />
+        <TodoTitleDetails 
+            class="todo-title-details" 
+            v-if="todoActive" :titleValue="findActiveTodo().title" 
+            @update-title="onUpdateTitle" 
+        />
+        <TodoDescriptionDetails 
+            class="todo-description-details" 
+            v-if="todoActive" 
+            :descriptionValue="findActiveTodo().description" 
+            @update-description="onUpdateDescription"
+        />
         <div v-if="todoActive" class="todo-details-button-wrapper">
-            <SaveTodoButton :todoList="todoList" :activeTodo="findActiveTodo()" @todo-updated="notifyTodoUpdate" />
-            <DeleteTodoButtonBig :activeTodo="findActiveTodo()" :todoList="todoList" @todo-deleted="handleTodoDeleted" />
+            <SaveTodoButton 
+                :todoList="todoList" 
+                :activeTodo="findActiveTodo()"
+                :toChangeTodo="this.temporaryChangedTodo"
+                @invalid-input="notifyInvalidInput"
+                @todo-updated="notifyTodoUpdate" 
+            />
+            <DeleteTodoButtonBig 
+                :activeTodo="findActiveTodo()" 
+                :todoList="todoList" 
+                @todo-deleted="handleTodoDeleted" 
+            />
         </div>
     </div>
 </template>
@@ -22,15 +46,20 @@ import 'vue3-toastify/dist/index.css';
 export default {
     name: 'TodoDetails',
     components: {
-    ExitButton,
-    TodoTitleDetails,
-    TodoDescriptionDetails,
-    SaveTodoButton,
-    DeleteTodoButtonBig
-},
+        ExitButton,
+        TodoTitleDetails,
+        TodoDescriptionDetails,
+        SaveTodoButton,
+        DeleteTodoButtonBig
+    },
     props: {
         todoList: Object,
         todoActive: Boolean
+    },
+    data() {
+        return {
+            temporaryChangedTodo: {}
+        }
     },
     methods: {
         findActiveTodo() {
@@ -42,16 +71,26 @@ export default {
             this.$emit('todo-deleted', activeTodo)
         },
         onUpdateTitle(title) {
-            this.findActiveTodo().title = title
+            this.temporaryChangedTodo.title = title
         },
         onUpdateDescription(description) {
-            this.findActiveTodo().description = description
+            this.temporaryChangedTodo.description = description
         },
-        notifyTodoUpdate() {
-            this.$emit('todo-updated')
-            toast.success('Todo successfully updated!', {
+        notifyInvalidInput() {
+            toast.warning('Title cannot be empty', {
                 autoClose: 3000
             })
+        },
+        notifyTodoUpdate(newTodo) {
+            this.updateActiveTodo(newTodo)
+            this.$emit('todo-updated')
+            toast.success('Update successful!', {
+                autoClose: 3000
+            })
+        },
+        updateActiveTodo(newTodo) {
+            this.findActiveTodo().title = newTodo.title
+            this.findActiveTodo().description = newTodo.description
         }
     }
 }

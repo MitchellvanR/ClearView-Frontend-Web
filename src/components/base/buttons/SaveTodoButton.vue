@@ -10,23 +10,35 @@ export default {
     name: 'SaveTodoButton',
     props: {
         activeTodo: Object,
+        toChangeTodo: Object,
         todoList: Object
     },
     methods: {
         async updateTodoDetails() {
+            if (this.toChangeTodo.title == "") {
+                this.$emit('invalid-input')
+                return
+            }
             try {
                 await fetch(`http://localhost:8080/clearview-api/todoLists/${this.todoList.title}/todos/${this.activeTodo.title}/`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ title: this.activeTodo.title, description: this.activeTodo.description })
+                body: JSON.stringify(this.toChangeTodo)
                 });
-                this.$emit('todo-updated')
+                this.updateActiveTodo()
             } catch (err) {
                 console.error('API request failed:', err);
             }
         },
+        updateActiveTodo() {
+            let newTodo = this.toChangeTodo
+            if (!newTodo.title) newTodo.title = this.activeTodo.title
+            if (!newTodo.description) newTodo.description = this.activeTodo.description
+            newTodo.completed = this.activeTodo.completed
+            this.$emit('todo-updated', newTodo)
+        }
     }
 }
 </script>
