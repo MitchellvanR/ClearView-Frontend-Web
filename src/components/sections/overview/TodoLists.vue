@@ -46,6 +46,7 @@ export default {
 <style>
     .todo-lists {
         display: block;
+        overflow: overlay;
     }
 
     .todo-lists-list-item {

@@ -39,18 +39,17 @@ export default {
 }
 
 *::-webkit-scrollbar {
-    background-color: #fff;
     width: 16px;
 }
 
 *::-webkit-scrollbar-track {
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0);
+    z-index: -99;
 }
 
 *::-webkit-scrollbar-thumb {
     background-color: #babac0;
     border-radius: 16px;
-    border: 4px solid #fff;
 }
 
 *::-webkit-scrollbar-button {
