@@ -39,7 +39,7 @@ export default {
 }
 
 *::-webkit-scrollbar {
-    width: 16px;
+    width: .5rem;
 }
 
 *::-webkit-scrollbar-track {
@@ -48,7 +48,7 @@ export default {
 }
 
 *::-webkit-scrollbar-thumb {
-    background-color: #babac0;
+    background-color: var(--add-button-color);
     border-radius: 16px;
 }
 
