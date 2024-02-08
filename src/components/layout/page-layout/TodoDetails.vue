@@ -25,23 +25,17 @@
                 @invalid-input="notifyInvalidInput"
                 @todo-updated="notifyTodoUpdate" 
             />
-            <DeleteTodoButtonBig 
-                :activeTodo="findActiveTodo()" 
-                :todoList="todoList" 
-                @todo-deleted="handleTodoDeleted" 
-            />
         </div>
     </div>
 </template>
 <script>
-import ExitButton from '@/components/base/buttons/ExitButton.vue';
-import TodoTitleDetails from '@/components/sections/todo-details/TodoTitleDetails.vue';
-import TodoDescriptionDetails from '@/components/sections/todo-details/TodoDescriptionDetails.vue';
-import SaveTodoButton from '@/components/base/buttons/SaveTodoButton.vue';
-import DeleteTodoButtonBig from '@/components/base/buttons/DeleteTodoButtonBig.vue'
+import ExitButton from '@/components/base/buttons/ExitButton.vue'
+import TodoTitleDetails from '@/components/sections/todo-details/TodoTitleDetails.vue'
+import TodoDescriptionDetails from '@/components/sections/todo-details/TodoDescriptionDetails.vue'
+import SaveTodoButton from '@/components/base/buttons/SaveTodoButton.vue'
 
-import { toast } from 'vue3-toastify';
-import 'vue3-toastify/dist/index.css';
+import { toast } from 'vue3-toastify'
+import 'vue3-toastify/dist/index.css'
 
 export default {
     name: 'TodoDetails',
@@ -49,8 +43,7 @@ export default {
         ExitButton,
         TodoTitleDetails,
         TodoDescriptionDetails,
-        SaveTodoButton,
-        DeleteTodoButtonBig
+        SaveTodoButton
     },
     props: {
         todoList: Object,
@@ -66,9 +59,6 @@ export default {
             const activeTodo = this.todoList.todos.find(todo => todo.isActive == true);
             if (activeTodo != null) return activeTodo
             return {}
-        },
-        handleTodoDeleted(activeTodo) {
-            this.$emit('todo-deleted', activeTodo)
         },
         onUpdateTitle(title) {
             this.temporaryChangedTodo.title = title
