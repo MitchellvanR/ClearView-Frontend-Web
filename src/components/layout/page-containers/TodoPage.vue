@@ -76,8 +76,8 @@ export default {
             return this.todoLists.find(todoList => todoList.isActive == true);
         },
         handleTodoListCreated(newTodoList) {
-            this.clearActiveTodos()
             this.todoLists.push(newTodoList)
+            this.clearActiveTodos()
             this.clearActiveTodoLists()
             this.sortTodoListsByDate(this.todoLists)
             this.todoListsLoaded = true
