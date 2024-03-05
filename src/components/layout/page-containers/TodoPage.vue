@@ -76,8 +76,8 @@ export default {
             return this.todoLists.find(todoList => todoList.isActive == true);
         },
         handleTodoListCreated(newTodoList) {
-            this.todoLists.push(newTodoList)
             this.clearActiveTodos()
+            this.todoLists.push(newTodoList)
             this.clearActiveTodoLists()
             this.sortTodoListsByDate(this.todoLists)
             this.todoListsLoaded = true
@@ -96,6 +96,7 @@ export default {
             this.todoLists.forEach(todoList => todoList.isActive = false)
         },
         clearActiveTodos() {
+            if (!this.findActiveTodoList()) return;
             this.findActiveTodoList().todos.forEach(todo => todo.isActive = false)
             this.todoActive = false
         },
